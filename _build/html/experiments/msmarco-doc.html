@@ -1,0 +1,683 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>MS MARCO Document Ranking &mdash; OpenMatch v1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="TREC COVID" href="treccovid.html" />
+    <link rel="prev" title="MS MARCO Passage Ranking" href="msmarco.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> OpenMatch
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Get Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../get_started/introduction.html">OpenMatch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../get_started/install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../get_started/benchmark.html">Settings and Benchmark</a></li>
+</ul>
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/overview.html">OpenMatch APIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/user.html">User Guide</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Experimental Instractions</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="adhoc.html">Ad-hoc Search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classic.html">Classic Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msmarco.html">MS MARCO Passage Ranking</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">MS MARCO Document Ranking</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#results">Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#datasets-checkpoints">Datasets &amp; Checkpoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#inference">Inference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bert-firstp">BERT FirstP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bert-maxp">BERT MaxP</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#training">Training</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">BERT FirstP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">BERT MaxP</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="treccovid.html">TREC COVID</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">OpenMatch</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>MS MARCO Document Ranking</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/experiments/msmarco-doc.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ms-marco-document-ranking">
+<h1>MS MARCO Document Ranking<a class="headerlink" href="#ms-marco-document-ranking" title="Permalink to this headline">¶</a></h1>
+<p>MS MARCO (Microsoft Machine Reading Comprehension) is a large scale
+dataset, the current dataset has 1,010,916 unique real queries that were
+generated by sampling and anonymizing Bing usage logs. The corpus of
+document ranking task has 3.2 million documents and the training set has
+367,013 queries. More details are available at <a class="reference external" href="https://github.com/microsoft/MSMARCO-Document-Ranking">MSMARCO Document
+Ranking</a>.</p>
+<div class="section" id="results">
+<h2>Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h2>
+<p>Results of the runs we submitted.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 27%" />
+<col style="width: 21%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Retriever</p></th>
+<th class="head"><p>Reranker</p></th>
+<th class="head"><p>Coor-Ascent</p></th>
+<th class="head"><p>dev</p></th>
+<th class="head"><p>eval</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ANCE FirstP</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>0.373</p></td>
+<td><p>0.334</p></td>
+</tr>
+<tr class="row-odd"><td><p>ANCE MaxP</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>0.383</p></td>
+<td><p>0.342</p></td>
+</tr>
+<tr class="row-even"><td><p>ANCE FirstP+BM25</p></td>
+<td><p>BERT Base FirstP</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>0.407</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>ANCE FirstP+BM25</p></td>
+<td><p>BERT Base FirstP</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>0.431</p></td>
+<td><p>0.380</p></td>
+</tr>
+<tr class="row-even"><td><p>ANCE MaxP</p></td>
+<td><p>BERT Base MaxP</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>0.409</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>ANCE MaxP</p></td>
+<td><p>BERT Base MaxP</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>0.432</p></td>
+<td><p>0.391</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="datasets-checkpoints">
+<h2>Datasets &amp; Checkpoints<a class="headerlink" href="#datasets-checkpoints" title="Permalink to this headline">¶</a></h2>
+<p>For BERT FirstP, we concatenate the title and content of each document
+by a ‘[SEP]’. For BERT MaxP, we only use the content of each document.
+To reproduce our runs, we need to preprocess the official document file
+to the format: <em>doc_id doc</em>.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 4%" />
+<col style="width: 60%" />
+<col style="width: 5%" />
+<col style="width: 13%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>File</p></th>
+<th class="head"><p>Records</p></th>
+<th class="head"><p>Format</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Corpus</p></td>
+<td><p><a class="reference external" href="https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-docs.tsv.gz">msmarco-docs.tsv</a></p></td>
+<td><p>3,213,835</p></td>
+<td><p>tsv: docid, url, title, body</p></td>
+<td><p>Document Collections</p></td>
+</tr>
+<tr class="row-odd"><td><p>Train</p></td>
+<td><p><a class="reference external" href="https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-doctrain-queries.tsv.gz">msmarco-doctrain-queries.tsv</a></p></td>
+<td><p>367,013</p></td>
+<td><p>tsv: qid, query</p></td>
+<td><p>Training Queries</p></td>
+</tr>
+<tr class="row-even"><td><p>Train</p></td>
+<td><p><a class="reference external" href="https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-doctrain-qrels.tsv.gz">msmarco-doctrain-qrels.tsv</a></p></td>
+<td><p>384,597</p></td>
+<td><p>TREC qrels</p></td>
+<td><p>Training Query-Doc Relevance Labels</p></td>
+</tr>
+<tr class="row-odd"><td><p>Train</p></td>
+<td><p><a class="reference external" href="https://thunlp.oss-cn-qingdao.aliyuncs.com/OpenMatch/MSMARCO/document_ranking/bids_marco-doc_ance-firstp-10.tsv.zip">Training-Data-FirstP</a></p></td>
+<td><p>7,340,240</p></td>
+<td><p>tsv: qid, docid, label</p></td>
+<td><p>ANCE FirstP training data</p></td>
+</tr>
+<tr class="row-even"><td><p>Train</p></td>
+<td><p><a class="reference external" href="https://thunlp.oss-cn-qingdao.aliyuncs.com/OpenMatch/MSMARCO/document_ranking/bids_marco-doc_ance-maxp-10.tsv.zip">Training-Data-MaxP</a></p></td>
+<td><p>7,340,240</p></td>
+<td><p>tsv: qid, docid, label</p></td>
+<td><p>ANCE MaxP training data</p></td>
+</tr>
+<tr class="row-odd"><td><p>Dev</p></td>
+<td><p><a class="reference external" href="https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-docdev-queries.tsv.gz">msmarco-docdev-queries.tsv</a></p></td>
+<td><p>5,193</p></td>
+<td><p>tsv: qid, query</p></td>
+<td><p>Dev Queries</p></td>
+</tr>
+<tr class="row-even"><td><p>Dev</p></td>
+<td><p><a class="reference external" href="https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-docdev-qrels.tsv.gz">msmarco-docdev-qrels.tsv</a></p></td>
+<td><p>5,478</p></td>
+<td><p>TREC qrels</p></td>
+<td><p>Dev Query-Doc Relevance Labels</p></td>
+</tr>
+<tr class="row-odd"><td><p>Dev</p></td>
+<td><p><a class="reference external" href="https://thunlp.oss-cn-qingdao.aliyuncs.com/OpenMatch/MSMARCO/document_ranking/ANCE_FirstP_dev.trec.zip">ANCE-FirstP-dev-top100</a></p></td>
+<td><p>519,300</p></td>
+<td><p>TREC submission</p></td>
+<td><p>ANCE FirstP dev top100</p></td>
+</tr>
+<tr class="row-even"><td><p>Dev</p></td>
+<td><p><a class="reference external" href="https://thunlp.oss-cn-qingdao.aliyuncs.com/OpenMatch/MSMARCO/document_ranking/ANCE_MaxP_dev.trec.zip">ANCE-MaxP-dev-top100</a></p></td>
+<td><p>519,300</p></td>
+<td><p>TREC submission</p></td>
+<td><p>ANCE MaxP dev top100</p></td>
+</tr>
+<tr class="row-odd"><td><p>Test</p></td>
+<td><p><a class="reference external" href="https://msmarco.blob.core.windows.net/msmarcoranking/docleaderboard-queries.tsv.gz">docleaderboard-queries.tsv</a></p></td>
+<td><p>5,793</p></td>
+<td><p>tsv: qid, query</p></td>
+<td><p>Test Queries</p></td>
+</tr>
+<tr class="row-even"><td><p>Test</p></td>
+<td><p><a class="reference external" href="https://thunlp.oss-cn-qingdao.aliyuncs.com/OpenMatch/MSMARCO/document_ranking/ANCE_FirstP_eval.trec.zip">ANCE-FirstP-eval-top100</a></p></td>
+<td><p>579,300</p></td>
+<td><p>TREC submission</p></td>
+<td><p>ANCE FirstP eval top100</p></td>
+</tr>
+<tr class="row-odd"><td><p>Test</p></td>
+<td><p><a class="reference external" href="https://thunlp.oss-cn-qingdao.aliyuncs.com/OpenMatch/MSMARCO/document_ranking/ANCE_MaxP_eval.trec.zip">ANCE-MaxP-eval-top100</a></p></td>
+<td><p>579,300</p></td>
+<td><p>TREC submission</p></td>
+<td><p>ANCE MaxP eval top100</p></td>
+</tr>
+<tr class="row-even"><td><p>Model</p></td>
+<td><p><a class="reference external" href="https://thunlp.oss-cn-qingdao.aliyuncs.com/OpenMatch/MSMARCO/document_ranking/bert-base_ance_firstp.bin.zip">BERT-Base-ANCE-FirstP</a></p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>BERT Base ANCE FirstP checkpoint</p></td>
+</tr>
+<tr class="row-odd"><td><p>Model</p></td>
+<td><p><a class="reference external" href="https://thunlp.oss-cn-qingdao.aliyuncs.com/OpenMatch/MSMARCO/document_ranking/bert-base_ance_maxp.bin.zip">BERT-Base-ANCE-MaxP</a></p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>BERT Base ANCE MaxP checkpoint</p></td>
+</tr>
+<tr class="row-even"><td><p>Model</p></td>
+<td><p><a class="reference external" href="https://thunlp.oss-cn-qingdao.aliyuncs.com/OpenMatch/MSMARCO/document_ranking/f_maxp.ca">F-MaxP</a></p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>BERT Base ANCE MaxP Coor-Ascent weights</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="inference">
+<h2>Inference<a class="headerlink" href="#inference" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="bert-firstp">
+<h3>BERT FirstP<a class="headerlink" href="#bert-firstp" title="Permalink to this headline">¶</a></h3>
+<p>We provide the ANCE FirstP top-100 documents of
+<a class="reference external" href="https://thunlp.oss-cn-qingdao.aliyuncs.com/OpenMatch/MSMARCO/document_ranking/ANCE_FirstP_dev.trec.zip">dev</a>
+and
+<a class="reference external" href="https://thunlp.oss-cn-qingdao.aliyuncs.com/OpenMatch/MSMARCO/document_ranking/ANCE_FirstP_eval.trec.zip">docleaderboard</a>
+queries in aliyun in standard TREC format. You can click to download
+these data.</p>
+<p>Preprocess dev and eval dataset, <em>msmarco-docs-firstp.tsv</em> is the
+preprocessed document file, each line is <em>doc_id title [SEP] content</em>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">data</span><span class="o">/</span><span class="n">preprocess</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">input_trec</span> <span class="n">data</span><span class="o">/</span><span class="n">ANCE_FirstP_dev</span><span class="o">.</span><span class="n">trec</span> <span class="o">-</span><span class="n">input_qrels</span> <span class="n">data</span><span class="o">/</span><span class="n">msmarco</span><span class="o">-</span><span class="n">docdev</span><span class="o">-</span><span class="n">qrels</span><span class="o">.</span><span class="n">tsv</span> <span class="o">-</span><span class="n">input_queries</span> <span class="n">data</span><span class="o">/</span><span class="n">msmarco</span><span class="o">-</span><span class="n">docdev</span><span class="o">-</span><span class="n">queries</span><span class="o">.</span><span class="n">tsv</span> <span class="o">-</span><span class="n">input_docs</span> <span class="n">data</span><span class="o">/</span><span class="n">msmarco</span><span class="o">-</span><span class="n">docs</span><span class="o">-</span><span class="n">firstp</span><span class="o">.</span><span class="n">tsv</span> <span class="o">-</span><span class="n">output</span> <span class="n">data</span><span class="o">/</span><span class="n">msmarco</span><span class="o">-</span><span class="n">doc_dev_firstp</span><span class="o">.</span><span class="n">jsonl</span>
+<span class="n">python</span> <span class="n">data</span><span class="o">/</span><span class="n">preprocess</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">input_trec</span> <span class="n">data</span><span class="o">/</span><span class="n">ANCE_FirstP_eval</span><span class="o">.</span><span class="n">trec</span> <span class="o">-</span><span class="n">input_queries</span> <span class="n">data</span><span class="o">/</span><span class="n">docleaderboard</span><span class="o">-</span><span class="n">queries</span><span class="o">.</span><span class="n">tsv</span> <span class="o">-</span><span class="n">input_docs</span> <span class="n">data</span><span class="o">/</span><span class="n">msmarco</span><span class="o">-</span><span class="n">docs</span><span class="o">-</span><span class="n">firstp</span><span class="o">.</span><span class="n">tsv</span> <span class="o">-</span><span class="n">output</span> <span class="n">data</span><span class="o">/</span><span class="n">msmarco</span><span class="o">-</span><span class="n">doc_eval_firstp</span><span class="o">.</span><span class="n">jsonl</span>
+</pre></div>
+</div>
+<p>The checkpoint of BERT Base FirstP is available at
+<a class="reference external" href="https://thunlp.oss-cn-qingdao.aliyuncs.com/OpenMatch/MSMARCO/document_ranking/bert-base_ance_firstp.bin.zip">BERT-Base-ANCE-FirstP</a>.
+Now you can reproduce <em>ANCE FirstP + BERT Base FirstP</em>, MRR&#64;100(dev):
+0.4079.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA_VISIBLE_DEVICES</span><span class="o">=</span><span class="mi">0</span> \
+<span class="n">python</span> <span class="n">inference</span><span class="o">.</span><span class="n">py</span> \
+        <span class="o">-</span><span class="n">task</span> <span class="n">classification</span> \
+        <span class="o">-</span><span class="n">model</span> <span class="n">bert</span> \
+        <span class="o">-</span><span class="n">max_input</span> <span class="mi">12800000</span> \
+        <span class="o">-</span><span class="n">test</span> <span class="o">./</span><span class="n">data</span><span class="o">/</span><span class="n">msmarco</span><span class="o">-</span><span class="n">doc_dev_firstp</span><span class="o">.</span><span class="n">jsonl</span> \
+        <span class="o">-</span><span class="n">vocab</span> <span class="n">bert</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">uncased</span> \
+        <span class="o">-</span><span class="n">pretrain</span> <span class="n">bert</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">uncased</span> \
+        <span class="o">-</span><span class="n">checkpoint</span> <span class="o">./</span><span class="n">checkpoints</span><span class="o">/</span><span class="n">bert</span><span class="o">-</span><span class="n">base_ance_firstp</span><span class="o">.</span><span class="n">bin</span> \
+        <span class="o">-</span><span class="n">res</span> <span class="o">./</span><span class="n">results</span><span class="o">/</span><span class="n">bert</span><span class="o">-</span><span class="n">base_ance_dev_firstp</span><span class="o">.</span><span class="n">trec</span> \
+        <span class="o">-</span><span class="n">max_query_len</span> <span class="mi">64</span> \
+        <span class="o">-</span><span class="n">max_doc_len</span> <span class="mi">445</span> \
+        <span class="o">-</span><span class="n">batch_size</span> <span class="mi">256</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="bert-maxp">
+<h3>BERT MaxP<a class="headerlink" href="#bert-maxp" title="Permalink to this headline">¶</a></h3>
+<p>ANCE MaxP top-100 documents of
+<a class="reference external" href="https://thunlp.oss-cn-qingdao.aliyuncs.com/OpenMatch/MSMARCO/document_ranking/ANCE_MaxP_dev.trec.zip">dev</a>
+and
+<a class="reference external" href="https://thunlp.oss-cn-qingdao.aliyuncs.com/OpenMatch/MSMARCO/document_ranking/ANCE_MaxP_eval.trec.zip">docleaderboard</a>
+queries are also provided.</p>
+<p>Preprocess dev dataset, <em>msmarco-docs-maxp.tsv</em> is the preprocessed
+document file, each line is <em>doc_id content</em>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">data</span><span class="o">/</span><span class="n">preprocess</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">input_trec</span> <span class="n">data</span><span class="o">/</span><span class="n">ANCE_FirstP_dev</span><span class="o">.</span><span class="n">trec</span> <span class="o">-</span><span class="n">input_qrels</span> <span class="n">data</span><span class="o">/</span><span class="n">msmarco</span><span class="o">-</span><span class="n">docdev</span><span class="o">-</span><span class="n">qrels</span><span class="o">.</span><span class="n">tsv</span> <span class="o">-</span><span class="n">input_queries</span> <span class="n">data</span><span class="o">/</span><span class="n">msmarco</span><span class="o">-</span><span class="n">docdev</span><span class="o">-</span><span class="n">queries</span><span class="o">.</span><span class="n">tsv</span> <span class="o">-</span><span class="n">input_docs</span> <span class="n">data</span><span class="o">/</span><span class="n">msmarco</span><span class="o">-</span><span class="n">docs</span><span class="o">-</span><span class="n">firstp</span><span class="o">.</span><span class="n">tsv</span> <span class="o">-</span><span class="n">output</span> <span class="n">data</span><span class="o">/</span><span class="n">msmarco</span><span class="o">-</span><span class="n">doc_dev_maxp</span><span class="o">.</span><span class="n">jsonl</span>
+<span class="n">python</span> <span class="n">data</span><span class="o">/</span><span class="n">preprocess</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">input_trec</span> <span class="n">data</span><span class="o">/</span><span class="n">ANCE_FirstP_eval</span><span class="o">.</span><span class="n">trec</span> <span class="o">-</span><span class="n">input_queries</span> <span class="n">data</span><span class="o">/</span><span class="n">docleaderboard</span><span class="o">-</span><span class="n">queries</span><span class="o">.</span><span class="n">tsv</span> <span class="o">-</span><span class="n">input_docs</span> <span class="n">data</span><span class="o">/</span><span class="n">msmarco</span><span class="o">-</span><span class="n">docs</span><span class="o">-</span><span class="n">firstp</span><span class="o">.</span><span class="n">tsv</span> <span class="o">-</span><span class="n">output</span> <span class="n">data</span><span class="o">/</span><span class="n">msmarco</span><span class="o">-</span><span class="n">doc_eval_maxp</span><span class="o">.</span><span class="n">jsonl</span>
+</pre></div>
+</div>
+<p>The checkpoint of BERT Base MaxP is available at
+<a class="reference external" href="https://thunlp.oss-cn-qingdao.aliyuncs.com/OpenMatch/MSMARCO/document_ranking/bert-base_ance_maxp.bin.zip">BERT-Base-ANCE-MaxP</a>.
+Now you can reproduce <em>ANCE MaxP + BERT Base MaxP</em>, MRR&#64;100(dev):
+0.4094.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA_VISIBLE_DEVICES</span><span class="o">=</span><span class="mi">0</span> \
+<span class="n">python</span> <span class="n">inference</span><span class="o">.</span><span class="n">py</span> \
+        <span class="o">-</span><span class="n">task</span> <span class="n">classification</span> \
+        <span class="o">-</span><span class="n">model</span> <span class="n">bert</span> \
+        <span class="o">-</span><span class="n">max_input</span> <span class="mi">12800000</span> \
+        <span class="o">-</span><span class="n">test</span> <span class="o">./</span><span class="n">data</span><span class="o">/</span><span class="n">msmarco</span><span class="o">-</span><span class="n">doc_dev_maxp</span><span class="o">.</span><span class="n">jsonl</span> \
+        <span class="o">-</span><span class="n">vocab</span> <span class="n">bert</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">uncased</span> \
+        <span class="o">-</span><span class="n">pretrain</span> <span class="n">bert</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">uncased</span> \
+        <span class="o">-</span><span class="n">checkpoint</span> <span class="o">./</span><span class="n">checkpoints</span><span class="o">/</span><span class="n">bert</span><span class="o">-</span><span class="n">base_ance_maxp</span><span class="o">.</span><span class="n">bin</span> \
+        <span class="o">-</span><span class="n">res</span> <span class="o">./</span><span class="n">results</span><span class="o">/</span><span class="n">bert</span><span class="o">-</span><span class="n">base_ance_dev_maxp</span><span class="o">.</span><span class="n">trec</span> \
+        <span class="o">-</span><span class="n">max_query_len</span> <span class="mi">64</span> \
+        <span class="o">-</span><span class="n">max_doc_len</span> <span class="mi">445</span> \
+        <span class="o">-</span><span class="n">maxp</span> \
+        <span class="o">-</span><span class="n">batch_size</span> <span class="mi">64</span>
+</pre></div>
+</div>
+<p>We also provide the weights of BERT Base MaxP features learned by
+Coor-Ascent:
+<a class="reference external" href="https://thunlp.oss-cn-qingdao.aliyuncs.com/OpenMatch/MSMARCO/document_ranking/f_maxp.ca">F-MaxP</a>.
+First, generate the BERT Base MaxP features of eval dataset.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA_VISIBLE_DEVICES</span><span class="o">=</span><span class="mi">0</span> \
+<span class="n">python</span> <span class="n">gen_feature</span><span class="o">.</span><span class="n">py</span> \
+        <span class="o">-</span><span class="n">task</span> <span class="n">classification</span> \
+        <span class="o">-</span><span class="n">model</span> <span class="n">bert</span> \
+        <span class="o">-</span><span class="n">max_input</span> <span class="mi">12800000</span> \
+        <span class="o">-</span><span class="n">dev</span> <span class="o">./</span><span class="n">data</span><span class="o">/</span><span class="n">msmarco</span><span class="o">-</span><span class="n">doc_eval_maxp</span><span class="o">.</span><span class="n">jsonl</span> \
+        <span class="o">-</span><span class="n">vocab</span> <span class="n">bert</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">uncased</span> \
+        <span class="o">-</span><span class="n">pretrain</span> <span class="n">bert</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">uncased</span> \
+        <span class="o">-</span><span class="n">checkpoint</span> <span class="o">./</span><span class="n">checkpoints</span><span class="o">/</span><span class="n">bert</span><span class="o">-</span><span class="n">base_ance_maxp</span><span class="o">.</span><span class="n">bin</span> \
+        <span class="o">-</span><span class="n">res</span> <span class="o">./</span><span class="n">features</span><span class="o">/</span><span class="n">bert</span><span class="o">-</span><span class="n">base_ance_eval_maxp_features</span> \
+        <span class="o">-</span><span class="n">max_query_len</span> <span class="mi">64</span> \
+        <span class="o">-</span><span class="n">max_doc_len</span> <span class="mi">445</span> \
+        <span class="o">-</span><span class="n">maxp</span> \
+        <span class="o">-</span><span class="n">batch_size</span> <span class="mi">64</span>
+</pre></div>
+</div>
+<p>Then, we compute the ranking score using the weights.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">java</span> <span class="o">-</span><span class="n">jar</span> <span class="n">LeToR</span><span class="o">/</span><span class="n">RankLib</span><span class="o">-</span><span class="mf">2.1</span><span class="o">-</span><span class="n">patched</span><span class="o">.</span><span class="n">jar</span> <span class="o">-</span><span class="n">load</span> <span class="n">checkpoints</span><span class="o">/</span><span class="n">f_maxp</span><span class="o">.</span><span class="n">ca</span> <span class="o">-</span><span class="n">rank</span> <span class="n">features</span><span class="o">/</span><span class="n">bert</span><span class="o">-</span><span class="n">base_ance_eval_maxp_features</span> <span class="o">-</span><span class="n">score</span> <span class="n">f0</span><span class="o">.</span><span class="n">score</span>
+<span class="n">python</span> <span class="n">LeToR</span><span class="o">/</span><span class="n">gen_trec</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">dev</span> <span class="n">data</span><span class="o">/</span><span class="n">msmarco</span><span class="o">-</span><span class="n">doc_eval_maxp</span><span class="o">.</span><span class="n">jsonl</span> <span class="o">-</span><span class="n">res</span> <span class="n">results</span><span class="o">/</span><span class="n">bert</span><span class="o">-</span><span class="n">base_ance_eval_maxp_ca</span><span class="o">.</span><span class="n">trec</span> <span class="o">-</span><span class="n">k</span> <span class="o">-</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="training">
+<h2>Training<a class="headerlink" href="#training" title="Permalink to this headline">¶</a></h2>
+<p>You can also finetune BERT yourself instead of using our checkpoints.</p>
+<div class="section" id="id1">
+<h3>BERT FirstP<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>We provide our training data (qid did label):
+<a class="reference external" href="https://thunlp.oss-cn-qingdao.aliyuncs.com/OpenMatch/MSMARCO/document_ranking/bids_marco-doc_ance-firstp-10.tsv.zip">Training-Data-FirstP</a>.
+10 negative documents are randomly sampled for each training query from
+ANCE FirstP top-100 documents. Since the dev dataset is too large to
+evaluate every 10000 steps, we only evaluate the top-100 documents of
+the first 50 dev queries: <em>msmarco-doc_dev_firstp-50.jsonl</em>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA_VISIBLE_DEVICES</span><span class="o">=</span><span class="mi">0</span> \
+<span class="n">python</span> <span class="n">train</span><span class="o">.</span><span class="n">py</span> \
+        <span class="o">-</span><span class="n">task</span> <span class="n">classification</span> \
+        <span class="o">-</span><span class="n">model</span> <span class="n">bert</span> \
+        <span class="o">-</span><span class="n">train</span> <span class="n">queries</span><span class="o">=./</span><span class="n">data</span><span class="o">/</span><span class="n">msmarco</span><span class="o">-</span><span class="n">doctrain</span><span class="o">-</span><span class="n">queries</span><span class="o">.</span><span class="n">tsv</span><span class="p">,</span><span class="n">docs</span><span class="o">=./</span><span class="n">data</span><span class="o">/</span><span class="n">msmarco</span><span class="o">-</span><span class="n">docs</span><span class="o">-</span><span class="n">firstp</span><span class="o">.</span><span class="n">tsv</span><span class="p">,</span><span class="n">qrels</span><span class="o">=./</span><span class="n">data</span><span class="o">/</span><span class="n">msmarco</span><span class="o">-</span><span class="n">doctrain</span><span class="o">-</span><span class="n">qrels</span><span class="o">.</span><span class="n">tsv</span><span class="p">,</span><span class="n">trec</span><span class="o">=./</span><span class="n">data</span><span class="o">/</span><span class="n">bids_marco</span><span class="o">-</span><span class="n">doc_ance</span><span class="o">-</span><span class="n">firstp</span><span class="o">-</span><span class="mf">10.</span><span class="n">tsv</span> \
+        <span class="o">-</span><span class="n">max_input</span> <span class="mi">12800000</span> \
+        <span class="o">-</span><span class="n">save</span> <span class="o">./</span><span class="n">checkpoints</span><span class="o">/</span><span class="n">bert</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">firstp</span><span class="o">.</span><span class="n">bin</span> \
+        <span class="o">-</span><span class="n">dev</span> <span class="o">./</span><span class="n">data</span><span class="o">/</span><span class="n">msmarco</span><span class="o">-</span><span class="n">doc_dev_firstp</span><span class="o">-</span><span class="mf">50.</span><span class="n">jsonl</span> \
+        <span class="o">-</span><span class="n">qrels</span> <span class="o">./</span><span class="n">data</span><span class="o">/</span><span class="n">msmarco</span><span class="o">-</span><span class="n">docdev</span><span class="o">-</span><span class="n">qrels</span><span class="o">.</span><span class="n">tsv</span> \
+        <span class="o">-</span><span class="n">vocab</span> <span class="n">bert</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">uncased</span> \
+        <span class="o">-</span><span class="n">pretrain</span> <span class="n">bert</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">uncased</span> \
+        <span class="o">-</span><span class="n">res</span> <span class="o">./</span><span class="n">results</span><span class="o">/</span><span class="n">bert</span><span class="o">.</span><span class="n">trec</span> \
+        <span class="o">-</span><span class="n">metric</span> <span class="n">mrr_cut_100</span> \
+        <span class="o">-</span><span class="n">max_query_len</span> <span class="mi">64</span> \
+        <span class="o">-</span><span class="n">max_doc_len</span> <span class="mi">445</span> \
+        <span class="o">-</span><span class="n">epoch</span> <span class="mi">1</span> \
+        <span class="o">-</span><span class="n">batch_size</span> <span class="mi">4</span> \
+        <span class="o">-</span><span class="n">lr</span> <span class="mf">3e-6</span> \
+        <span class="o">-</span><span class="n">n_warmup_steps</span> <span class="mi">100000</span> \
+        <span class="o">-</span><span class="n">eval_every</span> <span class="mi">10000</span>
+</pre></div>
+</div>
+<p>After BERT finetuning, we choose the best checkpoint on dev dataset to
+generate BERT features.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA_VISIBLE_DEVICES</span><span class="o">=</span><span class="mi">0</span> \
+<span class="n">python</span> <span class="n">gen_feature</span><span class="o">.</span><span class="n">py</span> \
+        <span class="o">-</span><span class="n">task</span> <span class="n">classification</span> \
+        <span class="o">-</span><span class="n">model</span> <span class="n">bert</span> \
+        <span class="o">-</span><span class="n">max_input</span> <span class="mi">12800000</span> \
+        <span class="o">-</span><span class="n">dev</span> <span class="o">./</span><span class="n">data</span><span class="o">/</span><span class="n">msmarco</span><span class="o">-</span><span class="n">doc_dev_firstp</span><span class="o">.</span><span class="n">jsonl</span> \
+        <span class="o">-</span><span class="n">vocab</span> <span class="n">bert</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">uncased</span> \
+        <span class="o">-</span><span class="n">pretrain</span> <span class="n">bert</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">uncased</span> \
+        <span class="o">-</span><span class="n">checkpoint</span> <span class="o">./</span><span class="n">checkpoints</span><span class="o">/</span><span class="n">bert</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">firstp</span><span class="o">.</span><span class="n">bin</span> \
+        <span class="o">-</span><span class="n">res</span> <span class="o">./</span><span class="n">features</span><span class="o">/</span><span class="n">bert</span><span class="o">-</span><span class="n">base_ance_dev_firstp_features</span> \
+        <span class="o">-</span><span class="n">max_query_len</span> <span class="mi">64</span> \
+        <span class="o">-</span><span class="n">max_doc_len</span> <span class="mi">445</span> \
+        <span class="o">-</span><span class="n">batch_size</span> <span class="mi">256</span>
+</pre></div>
+</div>
+<p>Then, we run Coor-Ascent on these features using RankLib to learned the
+weight of each feature.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">java</span> <span class="o">-</span><span class="n">jar</span> <span class="n">LeToR</span><span class="o">/</span><span class="n">RankLib</span><span class="o">-</span><span class="mf">2.1</span><span class="o">-</span><span class="n">patched</span><span class="o">.</span><span class="n">jar</span> <span class="o">-</span><span class="n">train</span> <span class="n">features</span><span class="o">/</span><span class="n">bert</span><span class="o">-</span><span class="n">base_ance_dev_firstp_features</span> <span class="o">-</span><span class="n">ranker</span> <span class="mi">4</span> <span class="o">-</span><span class="n">metric2t</span> <span class="n">RR</span><span class="nd">@100</span> <span class="o">-</span><span class="n">save</span> <span class="n">checkpoints</span><span class="o">/</span><span class="n">f_firstp</span><span class="o">.</span><span class="n">ca</span>
+</pre></div>
+</div>
+<p>Finally, we can generate the features of eval dataset, and compute the
+ranking scores using the feature weights, which is the same as that in
+the <em>inference</em> section.</p>
+</div>
+<div class="section" id="id2">
+<h3>BERT MaxP<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>We provde our training data (qid did label):
+<a class="reference external" href="https://thunlp.oss-cn-qingdao.aliyuncs.com/OpenMatch/MSMARCO/document_ranking/bids_marco-doc_ance-maxp-10.tsv.zip">Training-Data-MaxP</a>.
+10 negative documents are randomly sampled for each training query from
+ANCE MaxP top-100 documents. Since the dev dataset is too large to
+evaluate every 10000 steps, we only evaluate the top-100 documents of
+the first 50 dev queries: <em>msmarco-doc_dev_maxp-50.jsonl</em>.</p>
+<p>Train.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA_VISIBLE_DEVICES</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span> \
+<span class="n">python</span> <span class="n">train</span><span class="o">.</span><span class="n">py</span> \
+        <span class="o">-</span><span class="n">task</span> <span class="n">classification</span> \
+        <span class="o">-</span><span class="n">model</span> <span class="n">bert</span> \
+        <span class="o">-</span><span class="n">train</span> <span class="n">queries</span><span class="o">=./</span><span class="n">data</span><span class="o">/</span><span class="n">msmarco</span><span class="o">-</span><span class="n">doctrain</span><span class="o">-</span><span class="n">queries</span><span class="o">.</span><span class="n">tsv</span><span class="p">,</span><span class="n">docs</span><span class="o">=./</span><span class="n">data</span><span class="o">/</span><span class="n">msmarco</span><span class="o">-</span><span class="n">docs</span><span class="o">-</span><span class="n">maxp</span><span class="o">.</span><span class="n">tsv</span><span class="p">,</span><span class="n">qrels</span><span class="o">=./</span><span class="n">data</span><span class="o">/</span><span class="n">msmarco</span><span class="o">-</span><span class="n">doctrain</span><span class="o">-</span><span class="n">qrels</span><span class="o">.</span><span class="n">tsv</span><span class="p">,</span><span class="n">trec</span><span class="o">=./</span><span class="n">data</span><span class="o">/</span><span class="n">bids_marco</span><span class="o">-</span><span class="n">doc_ance</span><span class="o">-</span><span class="n">maxp</span><span class="o">-</span><span class="mf">10.</span><span class="n">tsv</span> \
+        <span class="o">-</span><span class="n">max_input</span> <span class="mi">12800000</span> \
+        <span class="o">-</span><span class="n">save</span> <span class="o">./</span><span class="n">checkpoints</span><span class="o">/</span><span class="n">bert</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">maxp</span><span class="o">.</span><span class="n">bin</span> \
+        <span class="o">-</span><span class="n">dev</span> <span class="o">./</span><span class="n">data</span><span class="o">/</span><span class="n">msmarco</span><span class="o">-</span><span class="n">doc_dev_maxp</span><span class="o">-</span><span class="mf">50.</span><span class="n">jsonl</span> \
+        <span class="o">-</span><span class="n">qrels</span> <span class="o">./</span><span class="n">data</span><span class="o">/</span><span class="n">msmarco</span><span class="o">-</span><span class="n">docdev</span><span class="o">-</span><span class="n">qrels</span><span class="o">.</span><span class="n">tsv</span> \
+        <span class="o">-</span><span class="n">vocab</span> <span class="n">bert</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">uncased</span> \
+        <span class="o">-</span><span class="n">pretrain</span> <span class="n">bert</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">uncased</span> \
+        <span class="o">-</span><span class="n">res</span> <span class="o">./</span><span class="n">results</span><span class="o">/</span><span class="n">bert</span><span class="o">.</span><span class="n">trec</span> \
+        <span class="o">-</span><span class="n">metric</span> <span class="n">mrr_cut_100</span> \
+        <span class="o">-</span><span class="n">max_query_len</span> <span class="mi">64</span> \
+        <span class="o">-</span><span class="n">max_doc_len</span> <span class="mi">445</span> \
+        <span class="o">-</span><span class="n">maxp</span> \
+        <span class="o">-</span><span class="n">epoch</span> <span class="mi">1</span> \
+        <span class="o">-</span><span class="n">batch_size</span> <span class="mi">8</span> \
+        <span class="o">-</span><span class="n">lr</span> <span class="mf">2e-5</span> \
+        <span class="o">-</span><span class="n">n_warmup_steps</span> <span class="mi">50000</span> \
+        <span class="o">-</span><span class="n">eval_every</span> <span class="mi">10000</span>
+</pre></div>
+</div>
+<p>After BERT finetuning, we choose the best checkpoint on dev dataset to
+generate BERT features.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA_VISIBLE_DEVICES</span><span class="o">=</span><span class="mi">0</span> \
+<span class="n">python</span> <span class="n">gen_feature</span><span class="o">.</span><span class="n">py</span> \
+        <span class="o">-</span><span class="n">task</span> <span class="n">classification</span> \
+        <span class="o">-</span><span class="n">model</span> <span class="n">bert</span> \
+        <span class="o">-</span><span class="n">max_input</span> <span class="mi">12800000</span> \
+        <span class="o">-</span><span class="n">dev</span> <span class="o">./</span><span class="n">data</span><span class="o">/</span><span class="n">msmarco</span><span class="o">-</span><span class="n">doc_dev_maxp</span><span class="o">.</span><span class="n">jsonl</span> \
+        <span class="o">-</span><span class="n">vocab</span> <span class="n">bert</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">uncased</span> \
+        <span class="o">-</span><span class="n">pretrain</span> <span class="n">bert</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">uncased</span> \
+        <span class="o">-</span><span class="n">checkpoint</span> <span class="o">./</span><span class="n">checkpoints</span><span class="o">/</span><span class="n">bert</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">maxp</span><span class="o">.</span><span class="n">bin</span> \
+        <span class="o">-</span><span class="n">res</span> <span class="o">./</span><span class="n">features</span><span class="o">/</span><span class="n">bert</span><span class="o">-</span><span class="n">base_ance_dev_maxp_features</span> \
+        <span class="o">-</span><span class="n">max_query_len</span> <span class="mi">64</span> \
+        <span class="o">-</span><span class="n">max_doc_len</span> <span class="mi">445</span> \
+        <span class="o">-</span><span class="n">maxp</span> \
+        <span class="o">-</span><span class="n">batch_size</span> <span class="mi">64</span>
+</pre></div>
+</div>
+<p>Then, we run Coor-Ascent on these features using RankLib to learned the
+weight of each feature.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">java</span> <span class="o">-</span><span class="n">jar</span> <span class="n">LeToR</span><span class="o">/</span><span class="n">RankLib</span><span class="o">-</span><span class="mf">2.1</span><span class="o">-</span><span class="n">patched</span><span class="o">.</span><span class="n">jar</span> <span class="o">-</span><span class="n">train</span> <span class="n">features</span><span class="o">/</span><span class="n">bert</span><span class="o">-</span><span class="n">base_ance_dev_maxp_features</span> <span class="o">-</span><span class="n">ranker</span> <span class="mi">4</span> <span class="o">-</span><span class="n">metric2t</span> <span class="n">RR</span><span class="nd">@100</span> <span class="o">-</span><span class="n">save</span> <span class="n">checkpoints</span><span class="o">/</span><span class="n">f_maxp</span><span class="o">.</span><span class="n">ca</span>
+</pre></div>
+</div>
+<p>Finally, we can generate the features of eval dataset, and compute the
+ranking scores using the feature weights, which is the same as that in
+the <em>inference</em> section.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="treccovid.html" class="btn btn-neutral float-right" title="TREC COVID" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="msmarco.html" class="btn btn-neutral float-left" title="MS MARCO Passage Ranking" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Zhenghao Liu and Kaitao Zhang.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
