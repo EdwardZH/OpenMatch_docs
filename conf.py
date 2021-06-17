@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'OpenMatch'
-copyright = '2021, Zhenghao Liu and Kaitao Zhang'
+copyright = '2021, OpenMatch Team'
 author = 'OpenMatch Developers'
 
 # The full version, including alpha/beta/rc tags
