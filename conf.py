@@ -19,7 +19,7 @@
 
 project = 'OpenMatch'
 copyright = '2021, Zhenghao Liu and Kaitao Zhang'
-author = 'Zhenghao Liu and Kaitao Zhang'
+author = 'OpenMatch Developers'
 
 # The full version, including alpha/beta/rc tags
 release = 'v1.0'
