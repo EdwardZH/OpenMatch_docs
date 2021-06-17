@@ -14,13 +14,15 @@ Welcome to OpenMatch's documentation!
    get_started/introduction
    get_started/install
    get_started/benchmark
+   get_started/quickstart
 
 .. toctree::
    :maxdepth: 1
    :caption: User Guide
    :glob:
 
-   user_guide/*
+   user_guide/overview.rst
+   user_guide/apis.rst
 
 .. toctree::
    :maxdepth: 1

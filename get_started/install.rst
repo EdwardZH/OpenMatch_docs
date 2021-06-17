@@ -1,7 +1,7 @@
 Installation
 ==================
 
-From PyPI
+Using PyPI
 --------------------------------
 
 ::

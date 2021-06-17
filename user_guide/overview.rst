@@ -1,5 +1,5 @@
-OpenMatch APIS
-================
+OpenMatch Guidelines
+=====================
 
 Train
 -----
