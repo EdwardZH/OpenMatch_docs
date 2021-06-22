@@ -19,11 +19,22 @@ Given the query and document, ranking models aim to calculate the matching score
 Traditional IR models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+OpenMatch provides several classic IR feature extractors. Document collection is needed for the creation of inverted dict. The parameter "docs" is a dict for all documents: "docs[docid] = doc".
+
+.. code:: python
+
+    corpus = om.Corpus(docs)
+    docs_terms, df, total_df, avg_doc_len = corpus.cnt_corpus()
+    query_terms, query_len = corpus.text2lm(query)
+    doc_terms, doc_len = corpus.text2lm(doc)
+    extractor = om.ClassicExtractor(query_terms, doc_terms, df, total_df, avg_doc_len)
+    features = extractor.get_feature()
+
 
 Pretrained IR models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-OpenMatch inherient parameters of pretrained language models from hugginface's trasnformers.
+OpenMatch inherients parameters of pretrained language models from hugginface's trasnformers.
 
 .. code:: python
 

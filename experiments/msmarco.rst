@@ -5,110 +5,20 @@ Given a query q and a the 1000 most relevant passages P = p1, p2, p3,...
 p1000, as retrieved by BM25 a successful system is expected to rerank
 the most relevant passage as high as possible. For this task not all
 1000 relevant items have a human labeled relevant passage. Evaluation
-will be done using MRR. More details are available at
-`MSMARCO-Passage-Ranking <https://github.com/microsoft/MSMARCO-Passage-Ranking>`__.
+will be done using MRR.
 
-Inference
----------
+Websites
+--------
 
-Get data and checkpoint from `Google
-Drive <https://drive.google.com/drive/folders/1w8_8kFlQaIsi-zfbh6yBaPGpK3_vLAZ6?usp=sharing>`__
+\* `MSMARCO <https://microsoft.github.io/msmarco/>`__.
+\* `MSMARCO Passage Ranking <https://github.com/microsoft/MSMARCO-Passage-Ranking/>`__.
 
-Get checkpoints of electra-large and roberta-large from
-`electra-large <https://drive.google.com/file/d/1e0FUHuzE4sEzWvoXLmcowY9P3_c6N1sk/view?usp=sharing>`__
-`roberta-large <https://drive.google.com/file/d/1fUBSSaYgYwKU6muKWqfsnAUCI98SUbpQ/view?usp=sharing>`__
+Models
+------
 
-Get MS MARCO collection.
-
-::
-
-    wget https://msmarco.blob.core.windows.net/msmarcoranking/collection.tar.gz -P ./data
-    tar -zxvf ./data/collection.tar.gz -C ./data/
-
-Reproduce bert-base, MRR@10(dev): 0.3494.
-
-::
-
-    CUDA_VISIBLE_DEVICES=0 \
-    python inference.py \
-            -task ranking \
-            -model bert \
-            -max_input 12800000 \
-            -test queries=./data/queries.dev.small.tsv,docs=./data/collection.tsv,trec=./data/run.msmarco-passage.dev.small.trec \
-            -vocab bert-base-uncased \
-            -pretrain bert-base-uncased \
-            -checkpoint ./checkpoints/bert-base.bin \
-            -res ./results/bert-base_msmarco-dev.trec \
-            -max_query_len 32 \
-            -max_doc_len 221 \
-            -batch_size 256
-
-Reproduce electra-base, MRR@10(dev): 0.3518.
-
-::
-
-    CUDA_VISIBLE_DEVICES=0 \
-    python inference.py \
-            -task ranking \
-            -model bert \
-            -max_input 12800000 \
-            -test queries=./data/queries.dev.small.tsv,docs=./data/collection.tsv,trec=./data/run.msmarco-passage.dev.small.trec \
-            -vocab google/electra-base-discriminator \
-            -pretrain google/electra-base-discriminator \
-            -checkpoint ./checkpoints/electra-base.bin \
-            -res ./results/electra-base_msmarco-dev.trec \
-            -max_query_len 32 \
-            -max_doc_len 221 \
-            -batch_size 256
-
-Reproduce electra-large, MRR@10(dev): 0.388
-
-::
-
-    CUDA_VISIBLE_DEVICES=0 \
-    python inference.py \
-            -task ranking \
-            -model bert \
-            -max_input 12800000 \
-            -test queries=./data/queries.dev.small.tsv,docs=./data/collection.tsv,trec=./data/run.msmarco-passage.dev.small.trec \
-            -vocab google/electra-large-discriminator \
-            -pretrain google/electra-large-discriminator \
-            -checkpoint ./checkpoints/electra_large.bin \
-            -res ./results/electra-large_msmarco-dev.trec \
-            -max_query_len 32 \
-            -max_doc_len 221 \
-            -batch_size 256
-
-Reproduce roberta-large, MRR@10(dev): 0.386
-
-::
-
-    CUDA_VISIBLE_DEVICES=0 \
-    python inference.py \
-            -task ranking \
-            -model roberta \
-            -max_input 12800000 \
-            -test queries=./data/queries.dev.small.tsv,docs=./data/collection.tsv,trec=./data/run.msmarco-passage.dev.small.trec \
-            -vocab roberta-large \
-            -pretrain roberta-large \
-            -checkpoint ./checkpoints/roberta_large.bin \
-            -res ./results/roberta-large_msmarco-dev.trec \
-            -max_query_len 32 \
-            -max_doc_len 221 \
-            -batch_size 256
-
-The checkpoints of roberta-large and electra-large are trained on
-MS-MARCO training data
-
-::
-
-    wget https://msmarco.blob.core.windows.net/msmarcoranking/triples.train.small.tar.gz -P ./data
-    tar -zxvf ./data/triples.train.small.tar.gz -C ./data/ 
-
-For eval dataset inference, just change the trec file to
-*./data/run.msmarco-passage.eval.small.trec*. The top1000 trec files for
-dev and eval queries are generated following
-`anserini <https://github.com/castorini/anserini/blob/master/docs/experiments-msmarco-passage.md>`__.
+We use `BERT <https://arxiv.org/pdf/1810.04805.pdf/>`__ base model, 
+`RoBERTa <https://arxiv.org/pdf/1907.11692.pdf/>`__ large model, and 
+`ELECTRA <https://arxiv.org/pdf/2003.10555.pdf/>`__ base and large models for experiments.
 
 Training
 --------
@@ -218,3 +128,122 @@ Train roberta-large
 
 Since the whole dev dataset is too large, we only evaluate on top100
 when training, and inference on whole dataset.
+
+Inference
+---------
+
+Get data and checkpoint from `Google
+Drive <https://drive.google.com/drive/folders/1w8_8kFlQaIsi-zfbh6yBaPGpK3_vLAZ6?usp=sharing>`__
+
+Get checkpoints of electra-large and roberta-large from
+`electra-large <https://drive.google.com/file/d/1e0FUHuzE4sEzWvoXLmcowY9P3_c6N1sk/view?usp=sharing>`__
+`roberta-large <https://drive.google.com/file/d/1fUBSSaYgYwKU6muKWqfsnAUCI98SUbpQ/view?usp=sharing>`__
+
+Get MS MARCO collection.
+
+::
+
+    wget https://msmarco.blob.core.windows.net/msmarcoranking/collection.tar.gz -P ./data
+    tar -zxvf ./data/collection.tar.gz -C ./data/
+
+Reproduce bert-base, MRR@10(dev): 0.3494.
+
+::
+
+    CUDA_VISIBLE_DEVICES=0 \
+    python inference.py \
+            -task ranking \
+            -model bert \
+            -max_input 12800000 \
+            -test queries=./data/queries.dev.small.tsv,docs=./data/collection.tsv,trec=./data/run.msmarco-passage.dev.small.trec \
+            -vocab bert-base-uncased \
+            -pretrain bert-base-uncased \
+            -checkpoint ./checkpoints/bert-base.bin \
+            -res ./results/bert-base_msmarco-dev.trec \
+            -max_query_len 32 \
+            -max_doc_len 221 \
+            -batch_size 256
+
+Reproduce electra-base, MRR@10(dev): 0.3518.
+
+::
+
+    CUDA_VISIBLE_DEVICES=0 \
+    python inference.py \
+            -task ranking \
+            -model bert \
+            -max_input 12800000 \
+            -test queries=./data/queries.dev.small.tsv,docs=./data/collection.tsv,trec=./data/run.msmarco-passage.dev.small.trec \
+            -vocab google/electra-base-discriminator \
+            -pretrain google/electra-base-discriminator \
+            -checkpoint ./checkpoints/electra-base.bin \
+            -res ./results/electra-base_msmarco-dev.trec \
+            -max_query_len 32 \
+            -max_doc_len 221 \
+            -batch_size 256
+
+Reproduce electra-large, MRR@10(dev): 0.388
+
+::
+
+    CUDA_VISIBLE_DEVICES=0 \
+    python inference.py \
+            -task ranking \
+            -model bert \
+            -max_input 12800000 \
+            -test queries=./data/queries.dev.small.tsv,docs=./data/collection.tsv,trec=./data/run.msmarco-passage.dev.small.trec \
+            -vocab google/electra-large-discriminator \
+            -pretrain google/electra-large-discriminator \
+            -checkpoint ./checkpoints/electra_large.bin \
+            -res ./results/electra-large_msmarco-dev.trec \
+            -max_query_len 32 \
+            -max_doc_len 221 \
+            -batch_size 256
+
+Reproduce roberta-large, MRR@10(dev): 0.386
+
+::
+
+    CUDA_VISIBLE_DEVICES=0 \
+    python inference.py \
+            -task ranking \
+            -model roberta \
+            -max_input 12800000 \
+            -test queries=./data/queries.dev.small.tsv,docs=./data/collection.tsv,trec=./data/run.msmarco-passage.dev.small.trec \
+            -vocab roberta-large \
+            -pretrain roberta-large \
+            -checkpoint ./checkpoints/roberta_large.bin \
+            -res ./results/roberta-large_msmarco-dev.trec \
+            -max_query_len 32 \
+            -max_doc_len 221 \
+            -batch_size 256
+
+The checkpoints of roberta-large and electra-large are trained on
+MS-MARCO training data
+
+::
+
+    wget https://msmarco.blob.core.windows.net/msmarcoranking/triples.train.small.tar.gz -P ./data
+    tar -zxvf ./data/triples.train.small.tar.gz -C ./data/ 
+
+For eval dataset inference, just change the trec file to
+*./data/run.msmarco-passage.eval.small.trec*. The top1000 trec files for
+dev and eval queries are generated following
+`anserini <https://github.com/castorini/anserini/blob/master/docs/experiments-msmarco-passage.md>`__.
+
+Results
+-------
+
+Results of the runs we submitted.
+
++--------------------+--------------------+---------------+---------+---------+
+| Retriever          | Reranker           | Coor-Ascent   | dev     | eval    |
++====================+====================+===============+=========+=========+
+| BM25               | BERT Base          | -             | 0.349   | 0.345   |
++--------------------+--------------------+---------------+---------+---------+
+| BM25               | ELECTRA Base       | -             | 0.352   | 0.344   |
++--------------------+--------------------+---------------+---------+---------+
+| BM25               | RoBERTa Large      | -             | 0.386   | 0.375   |
++--------------------+--------------------+---------------+---------+---------+
+| BM25               | ELECTRA Large      | +             | 0.388   | 0.376   |
++--------------------+--------------------+---------------+---------+---------+
