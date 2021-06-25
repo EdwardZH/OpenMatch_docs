@@ -7,7 +7,9 @@ Data Statistics
 ---------------
 
 Data can be downloaded from
-`Datasets <https://cloud.tsinghua.edu.cn/d/77741ef1c1704866814a/>`__.
+`Datasets <https://cloud.tsinghua.edu.cn/d/77741ef1c1704866814a/>`__. 
+Note that we followed the settings of Zhuyun Dai's `work <https://dl.acm.org/doi/pdf/10.1145/3159652.3159659>`__. 
+We only use the subset of each dataset which was retrievaled by Indri's SDM for experiments.
 
 +---------------------+-------------------+--------------------------+--------------------------------------+
 | Datasets            | Queries/Anchors   | Query/Anchor-Doc Pairs   | Released Files                       |
@@ -21,12 +23,27 @@ Data can be downloaded from
 
 As we cannot release the document contents, the document IDs are used instead.
 
-Websites
---------
+tasks
+-----
 
-\* `ClueWeb09 <http://www.lemurproject.org/clueweb09/>`__.
-\* `ClueWeb12 <http://www.lemurproject.org/clueweb12.php/>`__.
-\* `Robust04 <https://trec.nist.gov/data/t13_robust.html/>`__.
+\* `ClueWeb09 <http://www.lemurproject.org/clueweb09/>`__. 
+The ClueWeb09 dataset was created to support research on information retrieval and related human 
+language technologies. It consists of about 1 billion web pages in ten languages that were collected 
+in January and February 2009. The dataset is used by several tracks of the TREC conference.
+
+\* `ClueWeb12 <http://www.lemurproject.org/clueweb12.php/>`__. 
+The ClueWeb12 dataset was created to support research on information retrieval and related human 
+language technologies. The dataset consists of 733,019,372 English web pages, collected between 
+February 10, 2012 and May 10, 2012. ClueWeb12 is a companion or successor to the ClueWeb09 web 
+dataset. Distribution of ClueWeb12 began in January 2013.
+
+
+\* `Robust04 <https://trec.nist.gov/data/t13_robust.html>`__. 
+The goal of the Robust track is to improve the consistency of retrieval technology by focusing 
+on poorly performing topics. In addition, the track brings back a classic, ad hoc retrieval task 
+in TREC that provides a natural home for new participants. An ad hoc task in TREC investigates 
+the performance of systems that search a static set of documents using previously-unseen topics. 
+For each topic, participants create a query and submit a ranking of the top 1000 documents for that topic.
 
 Models
 ------

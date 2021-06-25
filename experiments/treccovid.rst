@@ -14,8 +14,8 @@ managing scientific information in future global biomedical crises.
 About COVID-19 Dataset <https://www.semanticscholar.org/cord19>`__ `>>
 Our Paper <https://arxiv.org/abs/2011.01580>`__
 
-Websites
---------
+tasks
+-----
 
 \* `TREC-COVID <https://ir.nist.gov/covidSubmit/index.html/>`__.
 

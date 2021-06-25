@@ -7,10 +7,11 @@ the most relevant passage as high as possible. For this task not all
 1000 relevant items have a human labeled relevant passage. Evaluation
 will be done using MRR.
 
-Websites
---------
+tasks
+-----
 
 \* `MSMARCO <https://microsoft.github.io/msmarco/>`__.
+
 \* `MSMARCO Passage Ranking <https://github.com/microsoft/MSMARCO-Passage-Ranking/>`__.
 
 Models
