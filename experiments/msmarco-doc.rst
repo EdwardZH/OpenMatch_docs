@@ -14,13 +14,6 @@ tasks
 
 \* `MSMARCO Document Ranking <https://github.com/microsoft/MSMARCO-Document-Ranking/>`__.
 
-Models
-------
-
-We use `ANCE <https://arxiv.org/pdf/2007.00808/>`__ FirstP and MaxP as retrieval models, 
-`BERT <https://arxiv.org/pdf/1810.04805.pdf/>`__ FirstP and MaxP as reranking models. 
-The FirstP and MaxP settings are same as `paper <https://arxiv.org/pdf/1905.09217/>`__.
-
 Datasets & Checkpoints
 ----------------------
 
@@ -63,13 +56,19 @@ to the format: *doc\_id doc*.
 | Model    | `F-MaxP <https://thunlp.oss-cn-qingdao.aliyuncs.com/OpenMatch/MSMARCO/document_ranking/f_maxp.ca>`__                                             | -           | -                              | BERT Base ANCE MaxP Coor-Ascent weights   |
 +----------+--------------------------------------------------------------------------------------------------------------------------------------------------+-------------+--------------------------------+-------------------------------------------+
 
+Models
+------
+
+We use `ANCE <https://arxiv.org/pdf/2007.00808/>`__ FirstP and MaxP as retrieval models, 
+`BERT <https://arxiv.org/pdf/1810.04805.pdf/>`__ FirstP and MaxP as reranking models. 
+The FirstP and MaxP settings are same as `paper <https://arxiv.org/pdf/1905.09217/>`__.
+
 Training
---------
+~~~~~~~~
 
 You can also finetune BERT yourself instead of using our checkpoints.
 
-BERT FirstP
-~~~~~~~~~~~
+\* BERT FirstP
 
 We provide our training data (qid did label):
 `Training-Data-FirstP <https://thunlp.oss-cn-qingdao.aliyuncs.com/OpenMatch/MSMARCO/document_ranking/bids_marco-doc_ance-firstp-10.tsv.zip>`__.
@@ -131,8 +130,7 @@ Finally, we can generate the features of eval dataset, and compute the
 ranking scores using the feature weights, which is the same as that in
 the *inference* section.
 
-BERT MaxP
-~~~~~~~~~
+\* BERT MaxP
 
 We provde our training data (qid did label):
 `Training-Data-MaxP <https://thunlp.oss-cn-qingdao.aliyuncs.com/OpenMatch/MSMARCO/document_ranking/bids_marco-doc_ance-maxp-10.tsv.zip>`__.
@@ -199,10 +197,9 @@ ranking scores using the feature weights, which is the same as that in
 the *inference* section.
 
 Inference
----------
+~~~~~~~~~
 
-BERT FirstP
-~~~~~~~~~~~
+\* BERT FirstP
 
 We provide the ANCE FirstP top-100 documents of
 `dev <https://thunlp.oss-cn-qingdao.aliyuncs.com/OpenMatch/MSMARCO/document_ranking/ANCE_FirstP_dev.trec.zip>`__
@@ -240,8 +237,7 @@ Now you can reproduce *ANCE FirstP + BERT Base FirstP*, MRR@100(dev):
             -max_doc_len 445 \
             -batch_size 256
 
-BERT MaxP
-~~~~~~~~~
+\* BERT MaxP
 
 ANCE MaxP top-100 documents of
 `dev <https://thunlp.oss-cn-qingdao.aliyuncs.com/OpenMatch/MSMARCO/document_ranking/ANCE_MaxP_dev.trec.zip>`__

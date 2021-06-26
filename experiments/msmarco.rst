@@ -22,7 +22,7 @@ We use `BERT <https://arxiv.org/pdf/1810.04805.pdf/>`__ base model,
 `ELECTRA <https://arxiv.org/pdf/2003.10555.pdf/>`__ base and large models for experiments.
 
 Training
---------
+~~~~~~~~
 
 Train.
 
@@ -131,7 +131,7 @@ Since the whole dev dataset is too large, we only evaluate on top100
 when training, and inference on whole dataset.
 
 Inference
----------
+~~~~~~~~~
 
 Get data and checkpoint from `Google
 Drive <https://drive.google.com/drive/folders/1w8_8kFlQaIsi-zfbh6yBaPGpK3_vLAZ6?usp=sharing>`__

@@ -23,7 +23,7 @@ Models
 ------
 
 training
---------
+~~~~~~~~
 
 Get training data from `google
 drive <https://drive.google.com/file/d/1BT5gCOb1Kxkfh0BWqgUSgkxp2JPpRIWm/view?usp=sharing>`__.
@@ -94,7 +94,7 @@ For ReInfoSelect training:
             -eval_every 1
 
 Inference
----------
+~~~~~~~~~
 
 Get checkpoint. \*
 `checkpoints <https://drive.google.com/drive/folders/1YHCMdSI7clFqPdfrRHA786PIecIxtKqA?usp=sharing>`__

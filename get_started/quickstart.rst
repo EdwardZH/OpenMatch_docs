@@ -19,7 +19,20 @@ Given the query and document, ranking models aim to calculate the matching score
 Traditional IR models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-OpenMatch provides several classic IR feature extractors. Document collection is needed for the creation of inverted dict. The parameter "docs" is a dict for all documents: "docs[docid] = doc".
+We extract several classic IR features, and train learning-to-rank
+models, such as RankSVM, Coor-Ascent, on ClueWeb09-B, Robust04 and
+TREC-COVID datasets with 5 fold cross-validation. All the results can be
+found in our `paper <https://arxiv.org/abs/2012.14862>`__ of ACL 2021.
+
+The features consists of Boolean AND; Boolean OR; Coordinate match;
+Cosine similarity of bag-of-words vectors; TF-IDF; BM25; language models
+with no smoothing, Dirichlet smoothing, JM smoothing, and two-way
+smoothing. More details are available at
+`classic\_extractor <../OpenMatch/extractors/classic_extractor.py>`__.
+
+OpenMatch provides several classic IR feature extractors. 
+Document collection is needed for the creation of inverted dict. 
+The parameter "docs" is a dict for all documents: "docs[docid] = doc".
 
 .. code:: python
 
@@ -32,7 +45,7 @@ OpenMatch provides several classic IR feature extractors. Document collection is
 
 
 Pretrained IR models
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 OpenMatch inherients parameters of pretrained language models from hugginface's trasnformers.
 
@@ -46,7 +59,7 @@ OpenMatch inherients parameters of pretrained language models from hugginface's 
     ranking_score, ranking_features = model(torch.tensor(input_ids).unsqueeze(0))
 
 Neural IR models
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
 
 .. code:: python
 

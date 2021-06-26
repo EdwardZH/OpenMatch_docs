@@ -57,9 +57,9 @@ In ad-hoc search experiments, we use
 `ELECTRA <https://arxiv.org/pdf/2003.10555.pdf/>`__ as pretrained models.
 
 Training
---------
+~~~~~~~~
 
-We use the KNRM model for example.
+For training neural ranking models, we use the KNRM model for example. The **-model** parameter can be set to any neural ranking model, such as **tk**, **cknrm** and **edrm**.
 
 ::
 
@@ -84,8 +84,50 @@ We use the KNRM model for example.
             -n_warmup_steps 1000 \
             -eval_every 100
 
+For training pretrained models, we use the BERT model for example. We can also use any pretrained model.
+
+::
+
+    CUDA_VISIBLE_DEVICES=0 \
+    python train.py \
+            -task ranking \
+            -model bert \
+            -train queries=./data/query.jsonl,docs=./data/doc.jsonl,qrels=./data/qrels,trec=./data/fold0/train.trec \
+            -max_input 12800000 \
+            -save ./checkpoints/bert.bin \
+            -dev queries=./data/query.jsonl,docs=./data/doc.jsonl,qrels=./data/qrels,trec=./data/fold0/dev.trec \
+            -qrels ./data/qrels \
+            -vocab bert-base-uncased \
+            -pretrain bert-base-uncased \
+            -res ./results/bert.trec \
+            -metric ndcg_cut_20 \
+            -max_query_len 32 \
+            -max_doc_len 221 \
+            -epoch 1 \
+            -batch_size 16 \
+            -lr 3e-6 \
+            -n_warmup_steps 1000 \
+            -eval_every 100
+
+For getting classic IR features (e.g. boolean, language model, tfidf, bm25 ...), we need first read the document file to a dict (docs[docid] = doc), then for each given query-doc pair, 
+classic features can be compute as follows:
+
+.. code:: python
+
+    import OpenMatch as om
+
+    corpus = om.Corpus(docs)
+    docs_terms, df, total_df, avg_doc_len = corpus.cnt_corpus()
+    query_terms, query_len = corpus.text2lm(query)
+    doc_terms, doc_len = corpus.text2lm(doc)
+    extractor = om.ClassicExtractor(query_terms, doc_terms, df, total_df, avg_doc_len)
+    features = extractor.get_feature()
+
+
 Inference
----------
+~~~~~~~~~
+
+For neural ranking models:
 
 ::
 
@@ -100,7 +142,25 @@ Inference
         -res ./results/knrm.trec \
         -max_query_len 16 \
         -max_doc_len 256 \
-        -batch_size 32
+        -batch_size 512
+
+For pretrained models:
+
+::
+
+    CUDA_VISIBLE_DEVICES=0 \
+    python inference.py \
+            -task ranking \
+            -model bert \
+            -max_input 12800000 \
+            -test queries=./data/query.jsonl,docs=./data/doc.jsonl,qrels=./data/qrels,trec=./data/fold0/test.trec \
+            -vocab bert-base-uncased \
+            -pretrain bert-base-uncased \
+            -checkpoint ./checkpoints/bert.bin \
+            -res ./results/bert.trec \
+            -max_query_len 32 \
+            -max_doc_len 221 \
+            -batch_size 256
 
 Results
 -------
