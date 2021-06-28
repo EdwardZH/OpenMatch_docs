@@ -7,12 +7,12 @@ the most relevant passage as high as possible. For this task not all
 1000 relevant items have a human labeled relevant passage. Evaluation
 will be done using MRR.
 
-tasks
+Tasks
 -----
 
-\* `MSMARCO <https://microsoft.github.io/msmarco/>`__.
+\* `MSMARCO <https://microsoft.github.io/msmarco/>`__. **Domain: Web Pages**.
 
-\* `MSMARCO Passage Ranking <https://github.com/microsoft/MSMARCO-Passage-Ranking/>`__.
+\* `MSMARCO Passage Ranking <https://github.com/microsoft/MSMARCO-Passage-Ranking/>`__. **Domain: Web Pages**.
 
 Models
 ------
@@ -240,11 +240,11 @@ Results of the runs we submitted.
 +--------------------+--------------------+---------------+---------+---------+
 | Retriever          | Reranker           | Coor-Ascent   | dev     | eval    |
 +====================+====================+===============+=========+=========+
-| BM25               | BERT Base          | -             | 0.349   | 0.345   |
+| BM25               | BERT Base          | \-            | 0.349   | 0.345   |
 +--------------------+--------------------+---------------+---------+---------+
-| BM25               | ELECTRA Base       | -             | 0.352   | 0.344   |
+| BM25               | ELECTRA Base       | \-            | 0.352   | 0.344   |
 +--------------------+--------------------+---------------+---------+---------+
-| BM25               | RoBERTa Large      | -             | 0.386   | 0.375   |
+| BM25               | RoBERTa Large      | \-            | 0.386   | 0.375   |
 +--------------------+--------------------+---------------+---------+---------+
-| BM25               | ELECTRA Large      | +             | 0.388   | 0.376   |
+| BM25               | ELECTRA Large      | \+            | 0.388   | 0.376   |
 +--------------------+--------------------+---------------+---------+---------+

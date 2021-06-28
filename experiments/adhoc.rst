@@ -23,22 +23,22 @@ We only use the subset of each dataset which was retrievaled by Indri's SDM for 
 
 As we cannot release the document contents, the document IDs are used instead.
 
-tasks
+Tasks
 -----
 
-\* `ClueWeb09 <http://www.lemurproject.org/clueweb09/>`__. 
+\* `ClueWeb09 <http://www.lemurproject.org/clueweb09/>`__. **Domain: Web Pages**. 
 The ClueWeb09 dataset was created to support research on information retrieval and related human 
 language technologies. It consists of about 1 billion web pages in ten languages that were collected 
 in January and February 2009. The dataset is used by several tracks of the TREC conference.
 
-\* `ClueWeb12 <http://www.lemurproject.org/clueweb12.php/>`__. 
+\* `ClueWeb12 <http://www.lemurproject.org/clueweb12.php/>`__. **Domain: Web Pages**. 
 The ClueWeb12 dataset was created to support research on information retrieval and related human 
 language technologies. The dataset consists of 733,019,372 English web pages, collected between 
 February 10, 2012 and May 10, 2012. ClueWeb12 is a companion or successor to the ClueWeb09 web 
 dataset. Distribution of ClueWeb12 began in January 2013.
 
 
-\* `Robust04 <https://trec.nist.gov/data/t13_robust.html>`__. 
+\* `Robust04 <https://trec.nist.gov/data/t13_robust.html>`__. **Domain: News Articles**. 
 The goal of the Robust track is to improve the consistency of retrieval technology by focusing 
 on poorly performing topics. In addition, the track brings back a classic, ad hoc retrieval task 
 in TREC that provides a natural home for new participants. An ad hoc task in TREC investigates 
@@ -170,15 +170,15 @@ Results
 +-------------+----------------+---------------+-------------+------------+-------------+
 | Retriever   | Reranker       | Coor-Ascent   | ClueWeb09   | Robust04   | ClueWeb12   |
 +=============+================+===============+=============+============+=============+
-| SDM         | KNRM           | -             | 0.1880      | 0.3016     | 0.0968      |
+| SDM         | KNRM           | \-            | 0.1880      | 0.3016     | 0.0968      |
 +-------------+----------------+---------------+-------------+------------+-------------+
-| SDM         | Conv-KNRM      | -             | 0.1894      | 0.2907     | 0.0896      |
+| SDM         | Conv-KNRM      | \-            | 0.1894      | 0.2907     | 0.0896      |
 +-------------+----------------+---------------+-------------+------------+-------------+
-| SDM         | EDRM           | -             | 0.2015      | 0.2993     | 0.0937      |
+| SDM         | EDRM           | \-            | 0.2015      | 0.2993     | 0.0937      |
 +-------------+----------------+---------------+-------------+------------+-------------+
-| SDM         | TK             | -             | 0.2306      | 0.2822     | 0.0966      |
+| SDM         | TK             | \-            | 0.2306      | 0.2822     | 0.0966      |
 +-------------+----------------+---------------+-------------+------------+-------------+
-| SDM         | BERT Base      | -             | 0.2701      | 0.4168     | 0.1183      |
+| SDM         | BERT Base      | \-            | 0.2701      | 0.4168     | 0.1183      |
 +-------------+----------------+---------------+-------------+------------+-------------+
-| SDM         | ELECTRA Base   | -             | 0.2861      | 0.4668     | 0.1078      |
+| SDM         | ELECTRA Base   | \-            | 0.2861      | 0.4668     | 0.1078      |
 +-------------+----------------+---------------+-------------+------------+-------------+
