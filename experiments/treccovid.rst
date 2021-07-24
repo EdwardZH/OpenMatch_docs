@@ -14,6 +14,27 @@ managing scientific information in future global biomedical crises.
 About COVID-19 Dataset <https://www.semanticscholar.org/cord19>`__ `>>
 Our Paper <https://arxiv.org/abs/2011.01580>`__
 
+Data Statistics
+---------------
+
+Data can be downloaded from
+`Datasets <https://ir.nist.gov/covidSubmit/data.html>`__. 
+Each round (except Round1) only contains 5 new queries.
+
++---------------------+-----------+-------------------+
+| Datasets            | Queries   | Valid Documents   |
++=====================+===========+===================+
+| Round1              | 30        | 51.1K             |
++---------------------+-----------+-------------------+
+| Round2              | 35        | 59.9K             |
++---------------------+-----------+-------------------+
+| Round3              | 40        | 128.5K            |
++---------------------+-----------+-------------------+
+| Round4              | 45        | 157.8K            |
++---------------------+-----------+-------------------+
+| Round5              | 50        | 191.2K            |
++---------------------+-----------+-------------------+
+
 Tasks
 -----
 
@@ -22,7 +43,9 @@ Tasks
 Models
 ------
 
-We mainly use `SciBERT <https://arxiv.org/pdf/1903.10676.pdf/>`__ base model for TREC-COVID related experiments.
+We use `SciBERT <https://arxiv.org/pdf/1903.10676.pdf>`__ base model for TREC-COVID experiments. 
+`ReInfoSelect <https://arxiv.org/pdf/2001.10382.pdf>`__ and `MetaAdaptRank <https://arxiv.org/pdf/2012.14862.pdf>`__ frameworks 
+are used to select more adaptive data for better performance of ranking models.
 
 training
 ~~~~~~~~
