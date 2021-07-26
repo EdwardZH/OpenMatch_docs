@@ -47,6 +47,25 @@ We use `SciBERT <https://arxiv.org/pdf/1903.10676.pdf>`__ base model for TREC-CO
 `ReInfoSelect <https://arxiv.org/pdf/2001.10382.pdf>`__ and `MetaAdaptRank <https://arxiv.org/pdf/2012.14862.pdf>`__ frameworks 
 are used to select more adaptive data for better performance of ranking models.
 
+Results
+------
+
+-  Round2
+
++----------------+---------------------+-----------+----------+
+| Method         | Pre-trained Model   | NDCG@20   | P@20     |
++================+=====================+===========+==========+
+| ReInfoSelect   | SciBERT             | kaitao    | kaitao   |
++----------------+---------------------+-----------+----------+
+
+-  Round5
+
++-----------------+---------------------+-----------+----------+
+| Method          | Pre-trained Model   | NDCG@20   | P@20     |
++=================+=====================+===========+==========+
+| MetaAdaptRank   | PudMedBERT          | 0.7904    | 0.9400   |
++-----------------+---------------------+-----------+----------+
+
 training
 ~~~~~~~~
 
