@@ -7,8 +7,8 @@ Data Statistics
 ---------------
 
 Data can be downloaded from
-`Datasets <https://cloud.tsinghua.edu.cn/d/77741ef1c1704866814a/>`__. 
-Note that we followed the settings of Zhuyun Dai's `work <https://dl.acm.org/doi/pdf/10.1145/3159652.3159659>`__. 
+`Datasets <https://cloud.tsinghua.edu.cn/d/77741ef1c1704866814a/>`__.
+Note that we followed the settings of Zhuyun Dai's `work <https://dl.acm.org/doi/pdf/10.1145/3159652.3159659>`__.
 We only use the subset of each dataset which was retrievaled by Indri's SDM for experiments.
 
 +---------------------+-------------------+--------------------------+--------------------------------------+
@@ -26,34 +26,34 @@ As we cannot release the document contents, the document IDs are used instead.
 Tasks
 -----
 
-\* `ClueWeb09 <http://www.lemurproject.org/clueweb09/>`__. **Domain: Web Pages**. 
-The ClueWeb09 dataset was created to support research on information retrieval and related human 
-language technologies. It consists of about 1 billion web pages in ten languages that were collected 
+\* `ClueWeb09 <http://www.lemurproject.org/clueweb09/>`__. **Domain: Web Pages**.
+The ClueWeb09 dataset was created to support research on information retrieval and related human
+language technologies. It consists of about 1 billion web pages in ten languages that were collected
 in January and February 2009. The dataset is used by several tracks of the TREC conference.
 
-\* `ClueWeb12 <http://www.lemurproject.org/clueweb12.php/>`__. **Domain: Web Pages**. 
-The ClueWeb12 dataset was created to support research on information retrieval and related human 
-language technologies. The dataset consists of 733,019,372 English web pages, collected between 
-February 10, 2012 and May 10, 2012. ClueWeb12 is a companion or successor to the ClueWeb09 web 
+\* `ClueWeb12 <http://www.lemurproject.org/clueweb12.php/>`__. **Domain: Web Pages**.
+The ClueWeb12 dataset was created to support research on information retrieval and related human
+language technologies. The dataset consists of 733,019,372 English web pages, collected between
+February 10, 2012 and May 10, 2012. ClueWeb12 is a companion or successor to the ClueWeb09 web
 dataset. Distribution of ClueWeb12 began in January 2013.
 
 
-\* `Robust04 <https://trec.nist.gov/data/t13_robust.html>`__. **Domain: News Articles**. 
-The goal of the Robust track is to improve the consistency of retrieval technology by focusing 
-on poorly performing topics. In addition, the track brings back a classic, ad hoc retrieval task 
-in TREC that provides a natural home for new participants. An ad hoc task in TREC investigates 
-the performance of systems that search a static set of documents using previously-unseen topics. 
+\* `Robust04 <https://trec.nist.gov/data/t13_robust.html>`__. **Domain: News Articles**.
+The goal of the Robust track is to improve the consistency of retrieval technology by focusing
+on poorly performing topics. In addition, the track brings back a classic, ad hoc retrieval task
+in TREC that provides a natural home for new participants. An ad hoc task in TREC investigates
+the performance of systems that search a static set of documents using previously-unseen topics.
 For each topic, participants create a query and submit a ranking of the top 1000 documents for that topic.
 
 Models
 ------
 
-In ad-hoc search experiments, we use 
-`KNRM <https://dl.acm.org/doi/pdf/10.1145/3077136.3080809/>`__, 
-`Conv-KNRM <https://dl.acm.org/doi/pdf/10.1145/3159652.3159659/>`__, 
-`EDRM <https://arxiv.org/pdf/1805.07591/>`__ and 
-`TK <https://arxiv.org/pdf/2002.01854.pdf/>`__ as neural IR models, 
-`BERT <https://arxiv.org/pdf/1810.04805.pdf/>`__ and 
+In ad-hoc search experiments, we use
+`KNRM <https://dl.acm.org/doi/pdf/10.1145/3077136.3080809/>`__,
+`Conv-KNRM <https://dl.acm.org/doi/pdf/10.1145/3159652.3159659/>`__,
+`EDRM <https://arxiv.org/pdf/1805.07591/>`__ and
+`TK <https://arxiv.org/pdf/2002.01854.pdf/>`__ as neural IR models,
+`BERT <https://arxiv.org/pdf/1810.04805.pdf/>`__ and
 `ELECTRA <https://arxiv.org/pdf/2003.10555.pdf/>`__ as pretrained models.
 
 Training
@@ -109,7 +109,7 @@ For training pretrained models, we use the BERT model for example. We can also u
             -n_warmup_steps 1000 \
             -eval_every 100
 
-For getting classic IR features (e.g. boolean, language model, tfidf, bm25 ...), we need first read the document file to a dict (docs[docid] = doc), then for each given query-doc pair, 
+For getting classic IR features (e.g. boolean, language model, tfidf, bm25 ...), we need first read the document file to a dict (docs[docid] = doc), then for each given query-doc pair,
 classic features can be compute as follows:
 
 .. code:: python
@@ -182,3 +182,12 @@ Results
 +-------------+----------------+---------------+-------------+------------+-------------+
 | SDM         | ELECTRA Base   | \-            | 0.2861      | 0.4668     | 0.1078      |
 +-------------+----------------+---------------+-------------+------------+-------------+
+
+
++-------------+-----------------+----------------+---------------+-------------+------------+--------------+
+| Retriever   | Reranker        | Augment Data   | Coor-Ascent   | ClueWeb09   | Robust04   | TREC-COVID   |
++=============+=================+================+===============+=============+============+==============+
+| SDM         | ReInfoSelect    | CTSyncSup      | +             | 0.3243      | 0.4816     | 0.8230       |
++-------------+-----------------+----------------+---------------+-------------+------------+--------------+
+| SDM         | MetaAdaptRank   | CTSyncSup      | +             | 0.3416      | 0.4916     | 0.8378       |
++-------------+-----------------+----------------+---------------+-------------+------------+--------------+
