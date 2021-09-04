@@ -22,7 +22,7 @@ Welcome to OpenMatch's documentation!
    :glob:
 
    user_guide/overview.rst
-   user_guide/apis.rst
+
 
 .. toctree::
    :maxdepth: 1

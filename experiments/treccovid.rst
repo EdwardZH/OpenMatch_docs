@@ -1,16 +1,16 @@
 TREC COVID
 ==========
 
--  **`Top Spot on TREC-COVID
-   Challenge <https://ir.nist.gov/covidSubmit/about.html>`__** (May
-   2020, Round2)
+Top Spot on `TREC-COVID <https://ir.nist.gov/covidSubmit/about.html>`__  Challenge (May
+   2020, Round2). 
 
-| The twin goals of the challenge are to evaluate search algorithms and
+The twin goals of the challenge are to evaluate search algorithms and
 systems for helping scientists, clinicians, policy makers, and others
 manage the existing and rapidly growing corpus of scientific literature
 related to COVID-19, and to discover methods that will assist with
 managing scientific information in future global biomedical crises.
-|  `>> Reproduce Our Submit <./docs/experiments-treccovid.md>`__ `>>
+ 
+`>> Reproduce Our Submit <./docs/experiments-treccovid.md>`__ `>>
 About COVID-19 Dataset <https://www.semanticscholar.org/cord19>`__ `>>
 Our Paper <https://arxiv.org/abs/2011.01580>`__
 
