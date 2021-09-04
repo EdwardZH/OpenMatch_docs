@@ -196,7 +196,7 @@ Here provides the guiding code for the method of meta-learning to reweight synth
 Contrastive Supervision Synthesis (CTSyncSup)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1.1\/ Source-domain NLG training. We train two query generators (QG & ContrastQG) with the MS MARCO dataset using ``train_nlg.sh``:
+Source-domain NLG training. We train two query generators (QG & ContrastQG) with the MS MARCO dataset using ``train_nlg.sh``:
 
 ::
 
@@ -213,17 +213,15 @@ Optional arguments:
     --save_dir                  The path to save the checkpoints data
 
 
-1.2\/ Target-domain NLG inference
+Target-domain NLG inference. The whole nlg inference pipline contains five steps:
 
-The whole nlg inference pipline contains five steps:
+-  1/ Data preprocess
+-  2/ Seed query generation
+-  3/ BM25 subset retrieval
+-  4/ Contrastive doc pairs sampling
+-  5/ Contrastive query generation
 
--  1.2.1/ Data preprocess
--  1.2.2/ Seed query generation
--  1.2.3/ BM25 subset retrieval
--  1.2.4/ Contrastive doc pairs sampling
--  1.2.5/ Contrastive query generation
-
-1.2.1\/ Data preprocess. convert target-domain documents into the nlg format using ``prepro_nlg_dataset.sh``:
+1\/ Data preprocess. convert target-domain documents into the nlg format using ``prepro_nlg_dataset.sh``:
 
 ::
 
@@ -238,7 +236,7 @@ Optional arguments:
 --output_path           The path to save the preprocess data
 
 
-1.2.2\/ Seed query generation. utilize the trained QG model to generate seed queries for each target documents using ``nlg_inference.sh``:
+2\/ Seed query generation. utilize the trained QG model to generate seed queries for each target documents using ``nlg_inference.sh``:
 
 ::
 
@@ -253,7 +251,7 @@ Optional arguments:
 --target_dataset_name       choices=['clueweb09', 'robust04', 'trec-covid']   
 --generator_load_dir        The path to the pretrained QG checkpoints
 
-1.2.3\/ BM25 subset retrieval. utilize BM25 to retrieve document subset according to the seed queries using ``do_subset_retrieve.sh``:
+3\/ BM25 subset retrieval. utilize BM25 to retrieve document subset according to the seed queries using ``do_subset_retrieve.sh``:
 
 ::
 
@@ -267,7 +265,7 @@ Optional arguments:
     --dataset_name          choices=['clueweb09', 'robust04', 'trec-covid']   
     --generator_folder      choices=['t5-small', 't5-base']
 
-1.2.4\/ Contrastive doc pairs sampling. pairwise sample contrastive doc pairs from the BM25 retrieved subset using ``sample_contrast_pairs.sh``:
+4\/ Contrastive doc pairs sampling. pairwise sample contrastive doc pairs from the BM25 retrieved subset using ``sample_contrast_pairs.sh``:
 
 ::
 
@@ -281,7 +279,7 @@ Optional arguments:
 --generator_folder      choices=['t5-small', 't5-base']
 
 
-1.2.5\/ Contrastive query generation. utilize the trained ContrastQG model to generate new queries based on contrastive document pairs using ``nlg_inference.sh``:
+5\/ Contrastive query generation. utilize the trained ContrastQG model to generate new queries based on contrastive document pairs using ``nlg_inference.sh``:
 
 ::
 
