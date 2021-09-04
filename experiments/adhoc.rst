@@ -265,9 +265,9 @@ Optional arguments:
 ::
 
     --dataset_name          The name of the target dataset
-    --data_path          The name of the target dataset
+    --data_path             The path to the target dataset
 
-4\/ Contrastive doc pairs sampling. pairwise sample contrastive doc pairs from the BM25 retrieved subset using ``sample_contrast_pairs.sh``:
+4\/ Contrastive doc pairs sampling. pairwise sample contrastive doc pairs from the BM25 retrieved subset using ``sample_contrast_pairs.sh`` n the folder ``preprocess``:
 
 ::
 
@@ -278,14 +278,15 @@ Optional arguments:
 ::
 
 --dataset_name          choices=['clueweb09', 'robust04', 'trec-covid']   
---generator_folder      choices=['t5-small', 't5-base']
+--input_path            The path to the target dataset
+--generator_folder      The path to the sampled data
 
 
-5\/ Contrastive query generation. utilize the trained ContrastQG model to generate new queries based on contrastive document pairs using ``nlg_inference.sh``:
+5\/ Contrastive query generation. utilize the trained ContrastQG model to generate new queries based on contrastive document pairs using ``cqg_inference.sh`` in the folder ``run_shell``:
 
 ::
 
-    bash nlg_inference.sh
+    bash cqg_inference.sh
 
 -  Optional arguments:
 
@@ -293,7 +294,7 @@ Optional arguments:
 
     --generator_mode            choices='contrastqg'   
     --pretrain_generator_type   choices=['t5-small', 't5-base']   
-    --target_dataset_name       choices=['clueweb09', 'robust04', 'trec-covid']   
+    --target_dataset_name       The name of the target dataset
     --generator_load_dir        The path to the pretrained ContrastQG checkpoints
 
 
