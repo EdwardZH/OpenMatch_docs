@@ -183,7 +183,7 @@ Results
 | SDM         | ELECTRA Base   | \-            | 0.2861      | 0.4668     | 0.1078      |
 +-------------+----------------+---------------+-------------+------------+-------------+
 
-Meta Learning to Rank
+MetaAdaptRank
 =====================
 
 Here provides the guiding code for running meta-learning to reweight
