@@ -191,8 +191,8 @@ technique, which uses target data to reweight training data (augment Data) durin
 learning to rank process.
 
 A detailed introduction to the technology can be found in the paper
-`**Few-Shot Text Ranking with Meta Adapted Synthetic Weak
-Supervision** <https://arxiv.org/pdf/2012.14862.pdf>`__.
+`Few-Shot Text Ranking with Meta Adapted Synthetic Weak
+Supervision <https://arxiv.org/pdf/2012.14862.pdf>`__.
 
 Running
 ~~~~~~~~~
