@@ -186,7 +186,7 @@ Results
 MetaAdaptRank
 ---------------
 
-Here provides the guiding code for the method: meta-learning to reweight synthetic weak supervision data, which uses target data to reweight contrastive synthetic data (CTSyncSup) during the learning to rank process. This method contains two parts:
+Here provides the guiding code for the method, meta-learning to reweight synthetic weak supervision data, which uses target data to reweight contrastive synthetic data (CTSyncSup) during the learning to rank process. This method contains two parts:
 
 1. Contrastive Supervision Synthesis (CTSyncSup)
 2. Meta Learning to Reweight
@@ -196,6 +196,9 @@ A more detailed introduction to the technology can be found in the paper
 Supervision <https://arxiv.org/pdf/2012.14862.pdf>`__.
 
 
+
+Meta-learning to reweight
+~~~~~~~~~
 
 Meta-learning to reweight
 ~~~~~~~~~
