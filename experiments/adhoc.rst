@@ -205,11 +205,19 @@ Supervision <https://arxiv.org/pdf/2012.14862.pdf>`__.
 -  We train two query generators (QG & ContrastQG) with the MS MARCO
    dataset using ``train_nlg.sh`` in the ``run_shells`` folder:
 
-``bash prepro_nlg_dataset.sh``
+::
+    bash prepro_nlg_dataset.sh
+::
 
 -  Optional arguments:
+::
 
-``--generator_mode            choices=['qg', 'contrastqg']   --pretrain_generator_type   choices=['t5-small', 't5-base']   --train_file                The path to the source-domain nlg training dataset   --save_dir                  The path to save the checkpoints data; default: ../results``
+--generator_mode            choices=['qg', 'contrastqg']
+--pretrain_generator_type   choices=['t5-small', 't5-base']
+--train_file                The path to the source-domain nlg training dataset   
+--save_dir                  The path to save the checkpoints data; default: ../results``
+
+::
 
 1.2 Target-domain NLG inference
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -283,7 +291,7 @@ The code to run meta-learning is in the shell file
 In the shell file, the code is written as
 
 ::
-
+    
     export gpu_num=4 ## GPU Number
     export master_port=23900
     export job_name=MetaBERT
