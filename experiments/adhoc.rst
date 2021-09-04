@@ -189,7 +189,7 @@ MetaAdaptRank
 Here provides the guiding code for the method of meta-learning to reweight synthetic weak supervision data, which uses target data to reweight contrastive synthetic data (CTSyncSup) during the learning to rank process. A detailed introduction to the technology can be found in the paper
 `Few-Shot Text Ranking with Meta Adapted Synthetic Weak Supervision <https://arxiv.org/pdf/2012.14862.pdf>`__. This method contains two parts:
 
-1. Contrastive Supervision Synthesis (CTSyncSup)
+1. Contrastive Supervision Synthesis
 2. Meta Learning to Reweight
 
 
@@ -288,7 +288,7 @@ Optional arguments:
 
     bash cqg_inference.sh
 
--  Optional arguments:
+Optional arguments:
 
 ::
 
@@ -302,7 +302,7 @@ Optional arguments:
 Meta Learning to Reweight
 ~~~~~~~~~
 
-The code to run meta-learning is in the shell file
+The code to run meta-learning-to-reweight is in the shell file
 
 ::
 
