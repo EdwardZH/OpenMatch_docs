@@ -206,18 +206,19 @@ Supervision <https://arxiv.org/pdf/2012.14862.pdf>`__.
    dataset using ``train_nlg.sh`` in the ``run_shells`` folder:
 
 ::
+
     bash prepro_nlg_dataset.sh
-::
+
 
 -  Optional arguments:
-::
-
---generator_mode            choices=['qg', 'contrastqg']
---pretrain_generator_type   choices=['t5-small', 't5-base']
---train_file                The path to the source-domain nlg training dataset   
---save_dir                  The path to save the checkpoints data; default: ../results``
 
 ::
+
+    --generator_mode            choices=['qg', 'contrastqg']
+    --pretrain_generator_type   choices=['t5-small', 't5-base']
+    --train_file                The path to the source-domain nlg training dataset   
+    --save_dir                  The path to save the checkpoints data; default: ../results``
+
 
 1.2 Target-domain NLG inference
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
