@@ -221,26 +221,26 @@ Target-domain NLG inference. The whole nlg inference pipline contains five steps
 -  4/ Contrastive doc pairs sampling
 -  5/ Contrastive query generation
 
-1\/ Data preprocess. convert target-domain documents into the nlg format using ``prepro_nlg_dataset.sh``:
+1\/ Data preprocess. convert target-domain documents into the nlg format using ``prepro_dataset.sh`` in the folder ``preprocess``:
 
 ::
 
-    bash prepro_nlg_dataset.sh
+    bash prepro_dataset.sh
 
 Optional arguments:
 
 ::
 
---dataset_name          choices=['clueweb09', 'robust04', 'trec-covid']   
+--dataset_name          The name of the target dataset
 --input_path            The path to the target dataset   
 --output_path           The path to save the preprocess data
 
 
-2\/ Seed query generation. utilize the trained QG model to generate seed queries for each target documents using ``nlg_inference.sh``:
+2\/ Seed query generation. utilize the trained QG model to generate seed queries for each target documents using ``qg_inference.sh`` in the folder ``run_shell``:
 
 ::
 
-    bash nlg_inference.sh
+    bash qg_inference.sh
 
 Optional arguments:
 
@@ -248,22 +248,24 @@ Optional arguments:
 
 --generator_mode            choices='qg'   
 --pretrain_generator_type   choices=['t5-small', 't5-base']   
---target_dataset_name       choices=['clueweb09', 'robust04', 'trec-covid']   
+--target_dataset_name       The name of the target dataset
 --generator_load_dir        The path to the pretrained QG checkpoints
 
-3\/ BM25 subset retrieval. utilize BM25 to retrieve document subset according to the seed queries using ``do_subset_retrieve.sh``:
+
+3\/ BM25 subset retrieval. utilize BM25 to retrieve document subset according to the seed queries using the following shell commands in the folder ``bm25_retriever``:
 
 ::
-
-    bash do_subset_retrieve.sh
+    
+    bash build_index.sh
+    bash retrieve.sh
 
 
 Optional arguments:
 
 ::
 
-    --dataset_name          choices=['clueweb09', 'robust04', 'trec-covid']   
-    --generator_folder      choices=['t5-small', 't5-base']
+    --dataset_name          The name of the target dataset
+    --data_path          The name of the target dataset
 
 4\/ Contrastive doc pairs sampling. pairwise sample contrastive doc pairs from the BM25 retrieved subset using ``sample_contrast_pairs.sh``:
 
