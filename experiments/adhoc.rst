@@ -203,11 +203,11 @@ Supervision <https://arxiv.org/pdf/2012.14862.pdf>`__.
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 -  We train two query generators (QG & ContrastQG) with the MS MARCO
-   dataset using ``train_nlg.sh`` in the ``run_shells`` folder:
+   dataset using ``train_nlg.sh``:
 
 ::
 
-    bash prepro_nlg_dataset.sh
+    bash train_nlg.sh
 
 
 -  Optional arguments:
@@ -230,53 +230,83 @@ Supervision <https://arxiv.org/pdf/2012.14862.pdf>`__.
 -  1.2.4/ Contrastive doc pairs sampling
 -  1.2.5/ Contrastive query generation
 
--  1.2.1/ **Data preprocess.** convert target-domain documents into the
-   nlg format using ``prepro_nlg_dataset.sh`` in the ``preprocess``
-   folder:
+-  1.2.1/ Data preprocess. convert target-domain documents into the
+   nlg format using ``prepro_nlg_dataset.sh``:
 
-``bash prepro_nlg_dataset.sh``
+::
+
+    bash prepro_nlg_dataset.sh
+
+-  Optional arguments:
+
+::
+
+--dataset_name          choices=['clueweb09', 'robust04', 'trec-covid']   
+--input_path            The path to the target dataset   
+--output_path           The path to save the preprocess data
+
+
+-  1.2.2/ Seed query generation. utilize the trained QG model to
+   generate seed queries for each target documents using ``nlg_inference.sh``:
+
+::
+
+    bash nlg_inference.sh
 
 -  Optional arguments:
 
-``--dataset_name          choices=['clueweb09', 'robust04', 'trec-covid']   --input_path            The path to the target dataset   --output_path           The path to save the preprocess data; default: ../data/prepro_target_data``
+::
 
--  1.2.2/ **Seed query generation.** utilize the trained QG model to
-   generate seed queries for each target documents using
-   ``nlg_inference.sh`` in the ``run_shells`` folder:
+--generator_mode            choices='qg'   
+--pretrain_generator_type   choices=['t5-small', 't5-base']   
+--target_dataset_name       choices=['clueweb09', 'robust04', 'trec-covid']   
+--generator_load_dir        The path to the pretrained QG checkpoints
 
-``bash nlg_inference.sh``
+-  1.2.3/ BM25 subset retrieval. utilize BM25 to retrieve document
+   subset according to the seed queries using ``do_subset_retrieve.sh``:
 
--  Optional arguments:
-   ``--generator_mode            choices='qg'   --pretrain_generator_type   choices=['t5-small', 't5-base']   --target_dataset_name       choices=['clueweb09', 'robust04', 'trec-covid']   --generator_load_dir        The path to the pretrained QG checkpoints.``
+::
 
--  1.2.3/ **BM25 subset retrieval.** utilize BM25 to retrieve document
-   subset according to the seed queries using ``do_subset_retrieve.sh``
-   in the ``bm25_retriever`` folder:
-
-``bash do_subset_retrieve.sh``
+    bash do_subset_retrieve.sh
 
 -  Optional arguments:
-   ``--dataset_name          choices=['clueweb09', 'robust04', 'trec-covid']   --generator_folder      choices=['t5-small', 't5-base']``
 
--  1.2.4/ **Contrastive doc pairs sampling.** pairwise sample
+::
+
+    --dataset_name          choices=['clueweb09', 'robust04', 'trec-covid']   
+    --generator_folder      choices=['t5-small', 't5-base']
+
+-  1.2.4/ Contrastive doc pairs sampling. pairwise sample
    contrastive doc pairs from the BM25 retrieved subset using
-   ``sample_contrast_pairs.sh`` in the ``preprocess`` folder:
+   ``sample_contrast_pairs.sh``:
 
-``bash sample_contrast_pairs.sh``
+::
+
+bash sample_contrast_pairs.sh
 
 -  Optional arguments:
 
-``--dataset_name          choices=['clueweb09', 'robust04', 'trec-covid']   --generator_folder      choices=['t5-small', 't5-base']``
+::
 
--  1.2.5/ **Contrastive query generation.** utilize the trained
+--dataset_name          choices=['clueweb09', 'robust04', 'trec-covid']   
+--generator_folder      choices=['t5-small', 't5-base']
+
+-  1.2.5/ Contrastive query generation. utilize the trained
    ContrastQG model to generate new queries based on contrastive
-   document pairs using ``nlg_inference.sh`` in the ``run_shells``
-   folder:
+   document pairs using ``nlg_inference.sh``:
 
-``bash nlg_inference.sh``
+::
+
+    bash nlg_inference.sh
 
 -  Optional arguments:
-   ``--generator_mode            choices='contrastqg'   --pretrain_generator_type   choices=['t5-small', 't5-base']   --target_dataset_name       choices=['clueweb09', 'robust04', 'trec-covid']   --generator_load_dir        The path to the pretrained ContrastQG checkpoints.``
+
+::
+
+    --generator_mode            choices='contrastqg'   
+    --pretrain_generator_type   choices=['t5-small', 't5-base']   
+    --target_dataset_name       choices=['clueweb09', 'robust04', 'trec-covid']   
+    --generator_load_dir        The path to the pretrained ContrastQG checkpoints
 
 
 
