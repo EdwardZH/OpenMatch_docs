@@ -193,7 +193,7 @@ Here provides the guiding code for the method of meta-learning to reweight synth
 2. Meta Learning to Reweight
 
 
-Contrastive Supervision Synthesis (CTSyncSup)
+Contrastive Supervision Synthesis
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Source-domain NLG training. We train two query generators (QG & ContrastQG) with the MS MARCO dataset using ``train_nlg.sh``:
