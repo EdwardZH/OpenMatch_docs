@@ -220,13 +220,14 @@ Optional arguments:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The whole nlg inference pipline contains five steps:
+
 -  1.2.1/ Data preprocess
 -  1.2.2/ Seed query generation
 -  1.2.3/ BM25 subset retrieval
 -  1.2.4/ Contrastive doc pairs sampling
 -  1.2.5/ Contrastive query generation
 
-1.2.1 Data preprocess. convert target-domain documents into the nlg format using ``prepro_nlg_dataset.sh``:
+1.2.1\/ Data preprocess. convert target-domain documents into the nlg format using ``prepro_nlg_dataset.sh``:
 
 ::
 
