@@ -184,7 +184,7 @@ Results
 +-------------+----------------+---------------+-------------+------------+-------------+
 
 MetaAdaptRank
-=====================
+---------------
 
 Here provides the guiding code for running meta-learning to reweight
 technique, which uses target data to reweight training data during the
@@ -195,7 +195,7 @@ A detailed introduction to the technology can be found in the paper
 Supervision** <https://arxiv.org/pdf/2012.14862.pdf>`__.
 
 Running
--------
+~~~~~~~~~
 
 The code to run meta-learning is in the shell file
 
