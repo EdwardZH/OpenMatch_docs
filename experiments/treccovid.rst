@@ -1,8 +1,7 @@
 TREC COVID
 ==========
 
-Top Spot on `TREC-COVID <https://ir.nist.gov/covidSubmit/about.html>`__  Challenge (May
-   2020, Round2). 
+Top Spot on TREC-COVID Challenge (May 2020, Round2). 
 
 The twin goals of the challenge are to evaluate search algorithms and
 systems for helping scientists, clinicians, policy makers, and others
@@ -38,7 +37,7 @@ Each round (except Round1) only contains 5 new queries.
 Tasks
 -----
 
-\* `TREC-COVID <https://ir.nist.gov/covidSubmit/index.html/>`__. **Domain: BioMed Papers**.
+`TREC-COVID <https://ir.nist.gov/covidSubmit/index.html/>`__. **Domain: BioMed Papers**.
 
 Models
 ------
@@ -130,12 +129,12 @@ For ReInfoSelect training:
 Inference
 ~~~~~~~~~
 
-Get checkpoint. \*
+Get checkpoint.
 `checkpoints <https://drive.google.com/drive/folders/1YHCMdSI7clFqPdfrRHA786PIecIxtKqA?usp=sharing>`__
 
-Get data from Google Drive. \*
+Get data from Google Drive. 
 `round1 <https://drive.google.com/open?id=17CEoLecus232pCDwCECaJD4vNfh4OQao>`__
-\*
+and
 `round2 <https://drive.google.com/open?id=1O6e8gXFnykkhN2icMCuWlMZkKUv6B3fV>`__
 
 Filter round1 data from round2 data.
