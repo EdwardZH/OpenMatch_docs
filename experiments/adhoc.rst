@@ -187,7 +187,7 @@ MetaAdaptRank
 ---------------
 
 Here provides the guiding code for running meta-learning to reweight
-technique, which uses target data to reweight training data during the
+technique, which uses target data to reweight training data (augment Data) during the
 learning to rank process.
 
 A detailed introduction to the technology can be found in the paper
@@ -252,7 +252,5 @@ The tsv format of ``-target`` data is totally the same with the
 +-------------+-----------------+----------------+---------------+-------------+------------+--------------+
 | Retriever   | Reranker        | Augment Data   | Coor-Ascent   | ClueWeb09   | Robust04   | TREC-COVID   |
 +=============+=================+================+===============+=============+============+==============+
-| SDM         | ReInfoSelect    | CTSyncSup      | \+            | 0.3243      | 0.4816     | 0.8230       |
-+-------------+-----------------+----------------+---------------+-------------+------------+--------------+
 | SDM         | MetaAdaptRank   | CTSyncSup      | \+            | 0.3416      | 0.4916     | 0.8378       |
 +-------------+-----------------+----------------+---------------+-------------+------------+--------------+
