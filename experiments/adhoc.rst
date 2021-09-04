@@ -186,17 +186,14 @@ Results
 MetaAdaptRank
 ---------------
 
-Here provides the guiding code for the method, meta-learning to reweight synthetic weak supervision data, which uses target data to reweight contrastive synthetic data (CTSyncSup) during the learning to rank process. This method contains two parts:
+Here provides the guiding code for the method of meta-learning to reweight synthetic weak supervision data, which uses target data to reweight contrastive synthetic data (CTSyncSup) during the learning to rank process. A detailed introduction to the technology can be found in the paper
+`Few-Shot Text Ranking with Meta Adapted Synthetic Weak Supervision <https://arxiv.org/pdf/2012.14862.pdf>`__. This method contains two parts:
 
 1. Contrastive Supervision Synthesis (CTSyncSup)
 2. Meta Learning to Reweight
 
-A more detailed introduction to the technology can be found in the paper
-`Few-Shot Text Ranking with Meta Adapted Synthetic Weak
-Supervision <https://arxiv.org/pdf/2012.14862.pdf>`__.
 
-
-1 Contrastive Supervision Synthesis
+Contrastive Supervision Synthesis (CTSyncSup)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1.1 Source-domain NLG training
@@ -216,21 +213,20 @@ Optional arguments:
     --generator_mode            choices=['qg', 'contrastqg']
     --pretrain_generator_type   choices=['t5-small', 't5-base']
     --train_file                The path to the source-domain nlg training dataset   
-    --save_dir                  The path to save the checkpoints data; default: ../results``
+    --save_dir                  The path to save the checkpoints data
 
 
 1.2 Target-domain NLG inference
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
--  The whole nlg inference pipline contains five steps:
+The whole nlg inference pipline contains five steps:
 -  1.2.1/ Data preprocess
 -  1.2.2/ Seed query generation
 -  1.2.3/ BM25 subset retrieval
 -  1.2.4/ Contrastive doc pairs sampling
 -  1.2.5/ Contrastive query generation
 
-1.2.1/ Data preprocess. convert target-domain documents into the
-   nlg format using ``prepro_nlg_dataset.sh``:
+1.2.1 Data preprocess. convert target-domain documents into the nlg format using ``prepro_nlg_dataset.sh``:
 
 ::
 
@@ -245,8 +241,7 @@ Optional arguments:
 --output_path           The path to save the preprocess data
 
 
-1.2.2/ Seed query generation. utilize the trained QG model to
-   generate seed queries for each target documents using ``nlg_inference.sh``:
+1.2.2 Seed query generation. utilize the trained QG model to generate seed queries for each target documents using ``nlg_inference.sh``:
 
 ::
 
@@ -261,12 +256,12 @@ Optional arguments:
 --target_dataset_name       choices=['clueweb09', 'robust04', 'trec-covid']   
 --generator_load_dir        The path to the pretrained QG checkpoints
 
-1.2.3/ BM25 subset retrieval. utilize BM25 to retrieve document
-   subset according to the seed queries using ``do_subset_retrieve.sh``:
+1.2.3 BM25 subset retrieval. utilize BM25 to retrieve document subset according to the seed queries using ``do_subset_retrieve.sh``:
 
 ::
 
     bash do_subset_retrieve.sh
+
 
 Optional arguments:
 
@@ -275,9 +270,7 @@ Optional arguments:
     --dataset_name          choices=['clueweb09', 'robust04', 'trec-covid']   
     --generator_folder      choices=['t5-small', 't5-base']
 
-1.2.4/ Contrastive doc pairs sampling. pairwise sample
-   contrastive doc pairs from the BM25 retrieved subset using
-   ``sample_contrast_pairs.sh``:
+1.2.4 Contrastive doc pairs sampling. pairwise sample contrastive doc pairs from the BM25 retrieved subset using ``sample_contrast_pairs.sh``:
 
 ::
 
@@ -290,9 +283,8 @@ Optional arguments:
 --dataset_name          choices=['clueweb09', 'robust04', 'trec-covid']   
 --generator_folder      choices=['t5-small', 't5-base']
 
-1.2.5/ Contrastive query generation. utilize the trained
-   ContrastQG model to generate new queries based on contrastive
-   document pairs using ``nlg_inference.sh``:
+
+1.2.5 Contrastive query generation. utilize the trained ContrastQG model to generate new queries based on contrastive document pairs using ``nlg_inference.sh``:
 
 ::
 
