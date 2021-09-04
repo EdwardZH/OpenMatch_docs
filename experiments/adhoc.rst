@@ -196,9 +196,7 @@ Here provides the guiding code for the method of meta-learning to reweight synth
 Contrastive Supervision Synthesis (CTSyncSup)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1.1 Source-domain NLG training. 
-
-We train two query generators (QG & ContrastQG) with the MS MARCO dataset using ``train_nlg.sh``:
+1.1\/ Source-domain NLG training. We train two query generators (QG & ContrastQG) with the MS MARCO dataset using ``train_nlg.sh``:
 
 ::
 
@@ -215,7 +213,7 @@ Optional arguments:
     --save_dir                  The path to save the checkpoints data
 
 
-1.2 Target-domain NLG inference
+1.2\/ Target-domain NLG inference
 
 The whole nlg inference pipline contains five steps:
 
