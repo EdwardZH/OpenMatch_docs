@@ -302,7 +302,7 @@ Optional arguments:
 
 
 
-Meta-learning to reweight
+Meta Learning to Reweight
 ~~~~~~~~~
 
 The code to run meta-learning is in the shell file
