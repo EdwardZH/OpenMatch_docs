@@ -23,7 +23,6 @@ Welcome to OpenMatch's documentation!
 
    user_guide/overview.rst
    user_guide/apis.rst
-   user_guide/Run_MetaAdaptRank.rst
 
 .. toctree::
    :maxdepth: 1
