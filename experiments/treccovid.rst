@@ -50,14 +50,6 @@ are used to select more adaptive data for better performance of ranking models.
 Results
 ------
 
--  Round2
-
-+----------------+---------------------+-----------+----------+
-| Method         | Pre-trained Model   | NDCG@20   | P@20     |
-+================+=====================+===========+==========+
-| ReInfoSelect   | SciBERT             | kaitao    | kaitao   |
-+----------------+---------------------+-----------+----------+
-
 -  Round5
 
 +-----------------+---------------------+-----------+----------+
