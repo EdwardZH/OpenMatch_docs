@@ -267,7 +267,7 @@ Optional arguments:
     --dataset_name          The name of the target dataset
     --data_path             The path to the target dataset
 
-4\/ Contrastive doc pairs sampling. pairwise sample contrastive doc pairs from the BM25 retrieved subset using ``sample_contrast_pairs.sh`` n the folder ``preprocess``:
+4\/ Contrastive doc pairs sampling. pairwise sample contrastive doc pairs from the BM25 retrieved subset using ``sample_contrast_pairs.sh`` in the folder ``preprocess``:
 
 ::
 
